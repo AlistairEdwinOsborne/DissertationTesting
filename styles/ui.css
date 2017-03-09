@@ -1,0 +1,222 @@
+@font-face {
+    font-family: pixel;
+    src: url(pixel.ttf);
+}
+
+h1{
+    font-family: pixel;
+    text-align: center;
+    margin-top: 0px;
+    color: red;
+    font-size: 60px;
+}
+
+.main-container {
+    height: 450px;
+    width: 1100px;
+    margin: auto;
+    margin-top: 10px;
+
+}
+
+.control-container {
+    height: 200px;
+    width: 100%;
+    margin-top: -200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: none;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: inline-block;
+  color: #87CEFA;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+   font-family: pixel;
+    font-size: 40px;
+    text-align: center;
+    margin-left: 370px;
+    opacity: 0.5
+
+}
+
+body {
+    background-image: url("../imgs/background.png ")
+}
+
+@media screen and (max-width:680px) {
+  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width:680px) {
+  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}
+
+.active{
+    background-color: black;
+}
+
+.inline {
+
+}
+
+.board {
+    
+    border: 10px solid transparent;
+    float: left;
+    height: 420px;
+    width: 420px;
+    border-image: url("../imgs/board.png") 200 stretch;
+    /*margin-left: -50px;
+    margin-top: 30px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px; */
+}
+
+.board2 {
+    float: right;
+    border: 10px solid transparent;
+    height: 420px;
+    width: 420px;
+    /*margin-left: px;
+    margin-top: px ;*/
+    border-image: url("../imgs/board.png") 200 stretch; 
+}
+
+.cell {
+
+    width: 140px;
+    height: 140px;
+    background: url("../imgs/boardcell.png");
+    border-style: transparent;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    cursor:pointer;
+    float:left;
+    line-height: 140px;
+    text-align: center;
+    font-family: pixel;
+    font-size: 70px;
+}
+
+.cell2 {
+ 
+    width: 140px;
+    height: 140px;
+    background: url("../imgs/boardcell.png");
+    border-style: transparent;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    cursor:pointer;
+    float:left;
+    line-height: 140px;
+    text-align: center;
+    font-family: pixel;
+    font-size: 70px; 
+}
+.control {
+    font-family: pixel;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 200px;
+}
+
+.level {
+    margin: 0 15px;
+    color: black;
+    cursor: pointer;
+}
+
+.not-selected {
+    opacity: 0.5;
+    /* was 0.5 before */
+}
+
+.not-selected:hover {
+    opacity:1;
+}
+
+.start {
+    margin-top: 20px;
+    width: 150px;
+    height: 100px;
+    background: transparent url('../imgs/button.png');
+    line-height: 100px;
+    text-align: center;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    cursor:pointer;
+    opacity:1;
+    font-size: 30px;
+    /* was 0.5 before */
+}
+
+.restart {
+    margin-top: 20px;
+    width: 150px;
+    height: 100px;
+    background: transparent url('../imgs/button.png');
+    line-height: 100px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    cursor:pointer;
+    opacity:1;
+    /* was 0.5 before */
+}
+.restart:hover {
+   -webkit-filter: drop-shadow(10px 10px 5px #222);
+  filter: drop-shadow(10px 10px 5px #222);
+}
+
+.start:hover {
+   -webkit-filter: drop-shadow(10px 10px 5px #222);
+  filter: drop-shadow(10px 10px 5px #222);
+}
+
+.ingame {
+    display:none;
+    color:white;
+}
+
+.ingame > p {
+    margin:0px;
+}
+
+.robot {
+    opacity:0.5;
+}

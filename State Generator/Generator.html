@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="generator()">Try it</button>
+<div id="log"></div>
+<div id="loading"></div>
+<input type="file" id="openFile"/>
+    <br>
+    <pre id="fileContents"></pre>
+<script>
+document.getElementById("openFile").addEventListener('change', function(){
+    var fr = new FileReader();
+    fr.onload = function(){
+        document.getElementById("fileContents").textContent = this.result;
+    }
+    fr.readAsText(this.files[0]);
+})
+function generator(){
+var combinationCounter = 0;
+var state = ["E","E","E","E","E","E","E","E","E"];
+var display = document.getElementById('loading');
+/*var menaceState = new State2(state);
+console.log(menaceState);*/
+    combinationCounter++;
+var lognumber = 1;
+var player1 = true;
+     /* first turn */
+    for(var i=0; i<8; i++){
+        var stateArray = ["E","E","E","E","E","E","E","E","E"];
+        stateArray[i]= "X";
+        /*var s = new State2(stateArray);*/
+        if(player1 !== true){
+            /*console.log(s);*/
+            document.getElementById("log").innerHTML += ('<div>'+stateArray+'</div>');
+            combinationCounter++;
+            console.log(combinationCounter);
+        }
+        /* second turn */
+        for(var j=0; j<8; j++){
+            var stateArray2 = ["E","E","E","E","E","E","E","E","E"];
+            stateArray2[i]= "X";
+            if(stateArray2[j]=="E"){
+                stateArray2[j]="O";
+                /*var s = new State2(stateArray2);*/
+                if(player1 === true){
+                    document.getElementById("log").innerHTML += ('<div>'+stateArray2+'</div>');
+                    combinationCounter++;
+                    console.log(combinationCounter);
+                }
+                /*third turn */
+                for(var k=0; k<8; k++){
+                    var stateArray3 = ["E","E","E","E","E","E","E","E","E"];
+                    stateArray3[i]= "X";
+                    stateArray3[j]= "O";
+                    if(stateArray3[k]=="E"){
+                        stateArray3[k] = "X";
+                        /*var s = new State2(stateArray3);*/
+                        
+                        if(player1 !== true){
+                            document.getElementById("log").innerHTML += ('<div>'+stateArray3+'</div>');
+                            combinationCounter++;
+                            console.log(combinationCounter);
+                        }
+                        /*forth turn */
+                        for(var l=0; l<8; l++){
+                           var stateArray4 = ["E","E","E","E","E","E","E","E","E"];
+                            stateArray4[i] = "X";
+                            stateArray4[j] = "O";
+                            stateArray4[k] = "X";
+                            if (stateArray4[l]=="E"){
+                                stateArray4[l] = "O";
+                                if(player1 === true){
+                                    document.getElementById("log").innerHTML += ('<div>'+stateArray4+'</div>');
+                                    combinationCounter++;
+                                    console.log(combinationCounter);
+                                }
+                                /*firth turn */
+                                for(var m=0; m<8; m++){
+                                    var stateArray5 = ["E","E","E","E","E","E","E","E","E"];
+                                    stateArray5[i] = "X";
+                                    stateArray5[j] = "O";
+                                    stateArray5[k] = "X";
+                                    stateArray5[l] = "O";
+                                    if (stateArray5[m]=="E"){
+                                        stateArray5[m] = "X";
+                                        if(player1 !== true){
+                                            document.getElementById("log").innerHTML += ('<div>'+stateArray5+'</div>');
+                                            combinationCounter++;
+                                            console.log(combinationCounter);
+                                        }
+                                        /*sixth turn */
+                                        for(var n=0; n<8; n++){
+                                            var stateArray6 = ["E","E","E","E","E","E","E","E","E"];
+                                            stateArray6[i] = "X";
+                                            stateArray6[j] = "O";
+                                            stateArray6[k] = "X";
+                                            stateArray6[l] = "O";
+                                            stateArray6[m] = "X";
+                                            if (stateArray6[n]=="E"){
+                                                stateArray6[n] = "O";
+                                                if(player1 === true){
+                                                    document.getElementById("log").innerHTML += ('<div>'+stateArray6+'</div>');  
+                                                    combinationCounter++;
+                                                    console.log(combinationCounter);
+                                                }
+                                                /*seventh turn */
+                                                for(var o=0; o<8; o++){
+                                                    var stateArray7 = ["E","E","E","E","E","E","E","E","E"];
+                                                    stateArray7[i] = "X";
+                                                    stateArray7[j] = "O";
+                                                    stateArray7[k] = "X";
+                                                    stateArray7[l] = "O";
+                                                    stateArray7[m] = "X";
+                                                    stateArray7[n] = "O";
+                                                    if (stateArray7[o]=="E"){
+                                                        stateArray7[o] = "X";
+                                                        if(player1 !== true){
+                                                          document.getElementById("log").innerHTML += ('<div>'+stateArray7+'</div>');  
+                                                            combinationCounter++;
+                                                            console.log(combinationCounter);
+                                                        }
+                                                        /*eigth turn */
+                                                        for(var p=0; p<8; p++){
+                                                            var stateArray8 = ["E","E","E","E","E","E","E","E","E"];
+                                                            stateArray8[i] = "X";
+                                                            stateArray8[j] = "O";
+                                                            stateArray8[k] = "X";
+                                                            stateArray8[l] = "O";
+                                                            stateArray8[m] = "X";
+                                                            stateArray8[n] = "O";
+                                                            stateArray8[o] = "X";
+                                                            if (stateArray8[p]=="E"){
+                                                                stateArray8[o] = "O";
+                                                                if(player1 === true){
+                                                                   document.getElementById("log").innerHTML += ('<div>'+stateArray7+'</div>');   
+                                                                    combinationCounter++;
+                                                                    console.log(combinationCounter);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+          
+                        }
+                    }
+                }
+            }
+
+</script>
+
+</body>
+</html>

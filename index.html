@@ -1,0 +1,77 @@
+    <!DOCTYPE HTML>
+    <html>
+        <head>
+            <title>M.E.N.A.C.E</title>
+            <link rel = 'stylesheet' type = 'text/css' href = 'styles/ui.css'>
+        </head>
+        <body onload="dataRead();">
+             <h1>M.E.N.A.C.E</h1>
+            <!--<ul class="topnav" id="myTopnav">
+                <li><a class="active" href="index.html">Game</a></li>
+                <li><a href="blog.html">Dev Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="icon">
+                <a href="javascript:void(0);" onclick="swapPage()">">&#9776;</a>
+                </li>
+            </ul>-->
+            <div class = 'main-container'>
+                <div class = 'board'>
+                    <!-- data-indx following cell divs represents cell index in 1D array representation -->
+                    <div class='cell' data-indx = "0" ></div>
+                    <div class='cell' data-indx = "1" ></div>
+                    <div class='cell' data-indx = "2" ></div>
+                    <div class='cell' data-indx = "3" ></div>
+                    <div class='cell' data-indx = "4" ></div>
+                    <div class='cell' data-indx = "5" ></div>
+                    <div class='cell' data-indx = "6" ></div>
+                    <div class='cell' data-indx = "7" ></div>
+                    <div class='cell' data-indx = "8" ></div>
+                </div>
+                     <div class = 'board2'>
+                    <div class='cell2' data-indx = "9" ></div>
+                    <div class='cell2' data-indx = "10" ></div>
+                    <div class='cell2' data-indx = "11" ></div>
+                    <div class='cell2' data-indx = "12" ></div>
+                    <div class='cell2' data-indx = "13" ></div>
+                    <div class='cell2' data-indx = "14" ></div>
+                    <div class='cell2' data-indx = "15" ></div>
+                    <div class='cell2' data-indx = "16" ></div>
+                    <div class='cell2' data-indx = "17" ></div>
+                
+                </div>
+            </div>
+            <div class = 'control-container'>
+                <div class = 'control'>
+                    <!-- div.intial displays the starting controls -->
+                    <div class = 'intial'>
+                        <div class = 'difficulty'>
+                           <!--  <span class = 'level not-selected' id = "blind">Blind</span> -->
+                       
+                        <span class = 'level not-selected' id = "master">Perfect Player</span>  
+                        <span class = 'level not-selected' id = "menace">M.E.N.A.C.E</span>
+                        <span class = 'level not-selected' id = "human2">Human</span>
+                        </div>
+
+                        <div class='start'> Start </div>
+                       
+                    </div>
+
+                    <!-- div.ingame displays in-game messages and controls -->
+                    <div class = 'ingame' id="human">It's your turn ...</div>
+                    <div class = 'ingame' id="ai">
+                        <img src = "imgs/robot.png" id = "robot" class = "robot" />
+                        <p>Wait..</p>
+                    </div>
+                    <div class = 'ingame' id="won">You won !<div class='restart'> Reset </div></div>
+                    <div class = 'ingame' id="lost">You lost !<div class='restart'> Reset </div></div>
+                    <div class = 'ingame' id="drawingstate">It's a Draw !<div class='restart'> Reset </div></div>
+                </div>
+            </div>
+            <script src = "scripts/jquery-1.10.1.min.js"></script>
+            <script src = "scripts/ui.js"></script>
+            <script src = "scripts/game.js"></script>
+            <script src = "scripts/ai.js"></script>
+            <script src = "scripts/control.js"></script>
+            <script src = "scripts/pageScripts.js"></script>
+        </body>
+    </html>

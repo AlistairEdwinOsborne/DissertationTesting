@@ -150,11 +150,12 @@ body {
     font-size: 40px;
     text-align: center;
     margin-top: 200px;
+	color: white;
 }
 
 .level {
     margin: 0 15px;
-    color: black;
+    color: white;
     cursor: pointer;
 }
 

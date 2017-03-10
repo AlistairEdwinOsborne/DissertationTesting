@@ -139,7 +139,7 @@ var AI = function(level) {
                         var plot = new State(game.currentState);
                         
                             plot.board[indx] = "O";
-
+                            
 
                                 //console.log(indx);
                         var action = new AIAction(indx);
@@ -155,6 +155,12 @@ var AI = function(level) {
 
     
     function takeMenaceMove(turn){
+        var plot = new State(game.currentState);
+        var plotMirror = plot.board.reverse();
+        //plot.board; is the current state of the board
+        //boardArray; 
+       //beadIntArray;
+    
         /*
 *  Create a state or 'box' for each new state found and place beads within the box
 */

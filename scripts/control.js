@@ -108,7 +108,7 @@ $(".restart").click(function(){
              
              var next = new State(globals.game.currentState);
              next.board[indx] = "X";
-
+            
              ui.insertAt(indx, "X");
          
              //console.log(indx);

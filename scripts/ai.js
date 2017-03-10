@@ -159,120 +159,121 @@ var AI = function(level) {
         //plot.board; is the current state of the board
         //boardArray; 
        //beadIntArray;
-		var check = ["O","X","O","O","X","E","X","E","E"];
+		var check = ["X","O","X","O","E","E","E","E","E"];
 		var compare = check.toString();
 		var i;
 		function rotateRight90(){
 			var checker1 = ["E","E","E","E","E","E","E","E","E"];
-			checker1.splice(2, 1,check[0]);
-			checker1.splice(5, 1,check[1]);
-			checker1.splice(8, 1,check[2]);
-			checker1.splice(1, 1,check[3]);
-			checker1.splice(4, 1,check[4]);
-			checker1.splice(7, 1,check[5]);
 			checker1.splice(0, 1,check[6]);
-			checker1.splice(3, 1,check[7]);
-			checker1.splice(6, 1,check[8]);
+            checker1.splice(1, 1,check[3]);
+            checker1.splice(2, 1,check[0]);
+            checker1.splice(3, 1,check[7]);
+            checker1.splice(4, 1,check[4]);
+			checker1.splice(5, 1,check[1]);
+            checker1.splice(6, 1,check[8]);
+            checker1.splice(7, 1,check[5]);
+			checker1.splice(8, 1,check[2]);
 			return checker1;
 		}
 		
 		function rotateLeft90(){
 			var checker2 = ["E","E","E","E","E","E","E","E","E"];
-			checker2.splice(6, 1 ,check[0]);
-			checker2.splice(3, 1 ,check[1]);
-			checker2.splice(0, 1 ,check[2]);
-			checker2.splice(7, 1 ,check[3]);
-			checker2.splice(4, 1 ,check[4]);
-			checker2.splice(1, 1 ,check[5]);
-			checker2.splice(8, 1 ,check[6]);
-			checker2.splice(5, 1 ,check[7]);
-			checker2.splice(2, 1 ,check[8]);
+			checker2.splice(0, 1,check[2]);
+			checker2.splice(1, 1,check[5]);
+            checker2.splice(2, 1,check[8]);
+            checker2.splice(3, 1,check[1]);
+            checker2.splice(4, 1,check[4]);
+			checker2.splice(5, 1,check[7]);
+            checker2.splice(6, 1,check[0]);
+            checker2.splice(7, 1,check[3]);
+            checker2.splice(8, 1,check[6]);
 			return checker2;
 		}
 		
 			function rotate180(){
 			var checker3 = ["E","E","E","E","E","E","E","E","E"];
-			checker3.splice(8, 1 ,check[0]);
-			checker3.splice(7, 1 ,check[1]);
-			checker3.splice(6, 1 ,check[2]);
-			checker3.splice(5, 1 ,check[3]);
-			checker3.splice(4, 1 ,check[4]);
-			checker3.splice(3, 1 ,check[5]);
-			checker3.splice(2, 1 ,check[6]);
-			checker3.splice(1, 1 ,check[7]);
-			checker3.splice(0, 1 ,check[8]);
+			checker3.splice(0, 1,check[8]);
+            checker3.splice(1, 1,check[7]);
+            checker3.splice(2, 1,check[6]);
+            checker3.splice(3, 1,check[5]);
+            checker3.splice(4, 1,check[4]);
+            checker3.splice(5, 1,check[3]);
+            checker3.splice(6, 1,check[2]);
+            checker3.splice(7, 1,check[1]);
+            checker3.splice(8, 1,check[0]);
 			return checker3;
 		}
 		
 			function reflectVertical(){
 			var checker4 = ["E","E","E","E","E","E","E","E","E"];
-			checker4.splice(2, 1 ,check[0]);
-			checker4.splice(1, 1 ,check[1]);
-			checker4.splice(0, 1 ,check[2]);
-			checker4.splice(5, 1 ,check[3]);
-			checker4.splice(4, 1 ,check[4]);
-			checker4.splice(3, 1 ,check[5]);
-			checker4.splice(8, 1 ,check[6]);
-			checker4.splice(7, 1 ,check[7]);
-			checker4.splice(6, 1 ,check[8]);
+			checker4.splice(0, 1,check[2]);
+            checker4.splice(1, 1,check[1]);
+            checker4.splice(2, 1,check[0]);
+			checker4.splice(3, 1,check[5]);
+            checker4.splice(4, 1,check[4]);
+            checker4.splice(5, 1,check[3]);
+			checker4.splice(6, 1,check[8]);
+			checker4.splice(7, 1,check[7]);
+			checker4.splice(8, 1,check[6]);
 			return checker4;
 		}
 		
 			function reflectHorizontal(){
 			var checker5 = ["E","E","E","E","E","E","E","E","E"];
-			checker5.splice(6, 1 ,check[0]);
-			checker5.splice(7, 1 ,check[1]);
-			checker5.splice(0, 1 ,check[2]);
-			checker5.splice(5, 1 ,check[3]);
-			checker5.splice(4, 1 ,check[4]);
-			checker5.splice(3, 1 ,check[5]);
-			checker5.splice(8, 1 ,check[6]);
-			checker5.splice(7, 1 ,check[7]);
-			checker5.splice(6, 1 ,check[8]);
+            checker5.splice(0, 1,check[6]);
+            checker5.splice(1, 1,check[7]);
+            checker5.splice(2, 1,check[8]);
+            checker5.splice(3, 1,check[3]);
+            checker5.splice(4, 1,check[4]);
+            checker5.splice(5, 1,check[5]);
+            checker5.splice(6, 1,check[0]);
+			checker5.splice(7, 1,check[1]);
+			checker5.splice(8, 1,check[2]);
 			return checker5;
 		}
 		
 			function rotate180andReflectHorizontal(){
-			var checker6 = ["E","E","E","E","E","E","E","E","E"];
-			checker6.splice(8, 1 ,check[0]);
-			checker6.splice(1, 1 ,check[1]);
-			checker6.splice(0, 1 ,check[2]);
-			checker6.splice(5, 1 ,check[3]);
-			checker6.splice(4, 1 ,check[4]);
-			checker6.splice(3, 1 ,check[5]);
-			checker6.splice(2, 1 ,check[6]);
-			checker6.splice(7, 1 ,check[7]);
-			checker6.splice(6, 1 ,check[8]);
+			var checker6 = ["E","E","E","E","E","E","E","E","E"];		
+			checker6.splice(0, 1,check[2]);
+            checker6.splice(1, 1,check[1]);
+            checker6.splice(2, 1,check[6]);
+            checker6.splice(3, 1,check[5]);
+            checker6.splice(4, 1,check[4]);
+			checker6.splice(5, 1,check[3]);
+            checker6.splice(6, 1,check[8]);
+			checker6.splice(7, 1,check[7]);
+            checker6.splice(8, 1,check[0]);
 			return checker6;
 		}
 		
 			function rotateLeft90andReflectHorizontal(){
 			var checker7 = ["E","E","E","E","E","E","E","E","E"];
-			checker7.splice(8, 1 ,check[0]);
-			checker7.splice(5, 1 ,check[1]);
-			checker7.splice(2, 1 ,check[2]);
-			checker7.splice(7, 1 ,check[3]);
-			checker7.splice(4, 1 ,check[4]);
-			checker7.splice(1, 1 ,check[5]);
-			checker7.splice(6, 1 ,check[6]);
-			checker7.splice(3, 1 ,check[7]);
-			checker7.splice(0, 1 ,check[8]);
+			checker7.splice(0, 1,check[8]);
+            checker7.splice(1, 1,check[5]);
+            checker7.splice(2, 1,check[2]);
+            checker7.splice(3, 1,check[7]);
+            checker7.splice(4, 1,check[4]);
+            checker7.splice(5, 1,check[1]);
+            checker7.splice(6, 1,check[6]);
+            checker7.splice(7, 1,check[3]);
+            checker7.splice(8, 1,check[0]);
 			return checker7;
 		}
 		
 			function rotateRight90andReflectVertical(){
 			var checker8 = ["E","E","E","E","E","E","E","E","E"];
-			checker8.splice(0, 1 ,check[0]);
-			checker8.splice(3, 1 ,check[1]);
-			checker8.splice(6, 1 ,check[2]);
-			checker8.splice(1, 1 ,check[3]);
-			checker8.splice(4, 1 ,check[4]);
-			checker8.splice(7, 1 ,check[5]);
-			checker8.splice(2, 1 ,check[6]);
-			checker8.splice(5, 1 ,check[7]);
-			checker8.splice(8, 1 ,check[8]);			
+			checker8.splice(0, 1,check[0]);
+            checker8.splice(1, 1,check[3]);
+            checker8.splice(2, 1,check[6]);
+			checker8.splice(3, 1,check[1]);
+            checker8.splice(4, 1,check[4]);
+            checker8.splice(5, 1,check[7]);
+			checker8.splice(6, 1,check[2]);
+			checker8.splice(7, 1,check[5]);			
+			checker8.splice(8, 1,check[8]);			
 			return checker8;
 		}
+        
 		console.log("=================ROTATIONS=============================");
 		console.log("Original Input");
 		console.log(compare);
@@ -300,57 +301,86 @@ var AI = function(level) {
 		console.log("Input Roate 180 and Reflect Horizontal");
 		console.log(rotate180andReflectHorizontal());
 		console.log(rotate180andReflectHorizontal().toString());
-		
 		console.log("=================ROTATIONS=============================");
+  
 		for(i = 0; i < boardArray.length; i++){
 			if (compare === boardArray[i].toString()){
+                //console.log(i);
 				//do stuff here if the state is found
 				//console.log("poopy butts");
 				break;
 			}
 			else if (rotateRight90().toString() === boardArray[i].toString()){
+                //console.log(i);
 				//do stuff here if the state is found
 				console.log("rotateRight90");
 				break;
 			}
 			else if (rotateLeft90().toString() === boardArray[i].toString()){
-				//do stuff here if the state is found
+				//console.log(i);
+                //do stuff here if the state is found
 				console.log("rotateLeft90");
 				break;
 			}
 			else if (rotate180().toString() === boardArray[i].toString()){
-				//do stuff here if the state is found
+				//console.log(i);
+                //do stuff here if the state is found
 				console.log("rotate180");
 				break;
 			}
 			else if (reflectHorizontal().toString() === boardArray[i].toString()){
-				//do stuff here if the state is found
+				//console.log(i);
+                //do stuff here if the state is found
 				console.log("reflectHorizontal");
 				break;
 			}
 			else if (reflectVertical().toString() === boardArray[i].toString()){
-				//do stuff here if the state is found
+				//console.log(i);
+                //do stuff here if the state is found
 				console.log("reflectVertical");
 				break;
 			}
 			else if (rotateLeft90andReflectHorizontal().toString() === boardArray[i].toString()){
-				//do stuff here if the state is found
+				//console.log(i);
+                //do stuff here if the state is found
 				console.log("rotateLeft90andReflectHorizontal");
 				break;
 			}
 			else if (rotateRight90andReflectVertical().toString() === boardArray[i].toString()){
-				//do stuff here if the state is found
+				//console.log(i);
+                //do stuff here if the state is found
 				console.log("rotateRight90andReflectVertical");
 				break;
 			}
 			else if (rotate180andReflectHorizontal().toString() === boardArray[i].toString()){
-				//do stuff here if the state is found
+				//console.log(i);
+                //do stuff here if the state is found
 				console.log("rotate180andReflectHorizontal");
 				break;
 			}
 		}
 		console.log(i);
-		
+        
+        //sumple adder function    
+        function add(a, b){
+            return a + b;
+        }
+        
+        /*var menaceBoard = beadIntArray[i]
+        var testing = menaceBoard.reduce(add, 0);
+        console.log(testing);
+        var cumulativeProbability = 0;
+        var p = Math.floor(Math.random() * testing) + 1;
+        console.log(p);
+          for(var j = 0; j < beadIntArray[i].length; j++){
+                 cumulativeProbability += beadIntArray[i][j];
+                    if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                        console.log(beadIntArray[i][j]);
+                        //console.log("its met");
+                    }
+                }*/
+        
+		//rotation courtesy of PHS Learning Winning Strategies in Games 200/5 Chapter 3 Page 17-10
         /*
 *  Create a state or 'box' for each new state found and place beads within the box
 */

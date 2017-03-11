@@ -1,3 +1,4 @@
+var rewards = [];
 /*
  * Constructs an action that the ai player could make
  * @param pos [Number]: the cell position the ai would make its action in
@@ -598,16 +599,15 @@ var AI = function(level) {
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
                         break;
-                        //console.log("its met");
                     }
                 }
                 var action = new AIAction(j);
-
+                rewards.push(i,j);
+                console.log(rewards);
                 next = action.applyTo(game.currentState);
-            
                 ui.insertAt(j, turn);
             
-
+                game.advanceTo(next);
 				break;
 			}
             
@@ -629,8 +629,11 @@ var AI = function(level) {
                 }
                 var boardPlace = reverseRight90(j);
                 var action = new AIAction(boardPlace);
+                rewards.push(i,j);
+                console.log(rewards);
                 next = action.applyTo(game.currentState);
                 ui.insertAt(boardPlace, turn);
+                game.advanceTo(next);
                 console.log("rotateRight90");
 				break;
 				
@@ -656,7 +659,10 @@ var AI = function(level) {
                 var boardPlace = reverseLeft90(j);
                 var action = new AIAction(boardPlace);
                 next = action.applyTo(game.currentState);
+                rewards.push(i,j);
+                console.log(rewards);
                 ui.insertAt(boardPlace, turn);
+                game.advanceTo(next);
 				console.log("rotateLeft90");
 				break;
 			}
@@ -681,7 +687,10 @@ var AI = function(level) {
                 var boardPlace = reverse180(j);
                 var action = new AIAction(boardPlace);
                 next = action.applyTo(game.currentState);
+                rewards.push(i,j);
+                console.log(rewards);
                 ui.insertAt(boardPlace, turn);
+                game.advanceTo(next);
 				console.log("rotate180");
 				break;
 			}
@@ -706,7 +715,10 @@ var AI = function(level) {
                 var boardPlace = reverseReflectHorizontal(j);
                 var action = new AIAction(boardPlace);
                 next = action.applyTo(game.currentState);
+                rewards.push(i,j);
+                console.log(rewards);
                 ui.insertAt(boardPlace, turn);
+                game.advanceTo(next);
 				console.log("reflectHorizontal");
 				break;
 			}
@@ -731,7 +743,10 @@ var AI = function(level) {
                 var boardPlace = reverseReflectVertical(j);
                 var action = new AIAction(boardPlace);
                 next = action.applyTo(game.currentState);
+                rewards.push(i,j);
+                console.log(rewards);
                 ui.insertAt(boardPlace, turn);
+                game.advanceTo(next);
 				console.log("reflectVertical");
 				break;
 			}
@@ -756,7 +771,10 @@ var AI = function(level) {
                 var boardPlace = reverseLeft90andReflectHorizontal(j);
                 var action = new AIAction(boardPlace);
                 next = action.applyTo(game.currentState);
+                rewards.push(i,j);
+                console.log(rewards);
                 ui.insertAt(boardPlace, turn);
+                game.advanceTo(next);
 				console.log("rotateLeft90andReflectHorizontal");
 				break;
 			}
@@ -781,7 +799,10 @@ var AI = function(level) {
                 var boardPlace = reverseRight90andReflectVertical(j);
                 var action = new AIAction(boardPlace);
                 next = action.applyTo(game.currentState);
+                rewards.push(i,j);
+                console.log(rewards);
                 ui.insertAt(boardPlace, turn);
+                game.advanceTo(next);
 				console.log("rotateRight90andReflectVertical");
 				break;
 			}
@@ -806,14 +827,17 @@ var AI = function(level) {
                 var boardPlace = reverse180andReflectHorizontal(j);
                 var action = new AIAction(boardPlace);
                 next = action.applyTo(game.currentState);
+                rewards.push(i,j);
+                console.log(rewards);
                 ui.insertAt(boardPlace, turn);
+                game.advanceTo(next);
 				console.log("rotate180andReflectHorizontal");
 				break;
 			}
 		}
 		console.log(i);
         
-        game.advanceTo(next);
+        
 		//rotation courtesy of PHS Learning Winning Strategies in Games 200/5 Chapter 3 Page 17-10
     };
     

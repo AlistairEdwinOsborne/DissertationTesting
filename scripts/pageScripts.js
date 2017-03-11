@@ -27,7 +27,7 @@ function checkFileAPI(){
 
 function dataRead(){
         //grabs the file to read in and splits each state into a new line and adds to statearray
-        $.get('first_player_menace.txt', function(data){
+        $.get('second_player_menace.txt', function(data){
                 stateArray = data.split(/\n/);
             //splits each line in two then adds them to two seperate arrays
     for (var ix = 0; ix < stateArray.length; ix++){

@@ -155,11 +155,12 @@ var AI = function(level) {
 
     
     function takeMenaceMove(turn){
-        var plot = new State(game.currentState);
+        //var plot = new State(game.currentState.board);
         //plot.board; is the current state of the board
         //boardArray; 
-       //beadIntArray;
-		var check = ["X","O","X","O","E","E","E","E","E"];
+       //beadIntArray; ["X","E","E","E","E","E","E","E","O"];
+        //console.log(plot);
+		var check = game.currentState.board;
 		var compare = check.toString();
 		var i;
 		function rotateRight90(){
@@ -274,6 +275,281 @@ var AI = function(level) {
 			return checker8;
 		}
         
+        /*simple adder function
+        * @Param [int, int]
+        */
+          function add(a, b){
+            return a + b;
+        }
+        
+        /*rotates the index back to the current game state form
+        * @Param [int]
+        */
+        function reverseRight90(a){
+                if( a === 2){
+                    return 0;
+                }
+                else if( a === 5){
+                    return 1;
+                }
+                else if (a === 8){
+                    return 2;
+                }
+                else if( a === 1){
+                    return 3;
+                }
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 7){
+                    return 5;
+                }
+                else if( a === 0){
+                    return 6;
+                }
+                else if( a === 3){
+                    return 7;
+                }
+                else if( a === 6){
+                    return 8;
+                }
+
+        }
+        /*rotates the index back to the current game state form
+        * @Param [int]
+        */
+          function reverseLeft90(a){
+                if( a === 6){
+                    return 0;
+                }
+                else if( a === 3){
+                    return 1;
+                }
+                else if (a === 0){
+                    return 2;
+                }
+                else if( a === 7){
+                    return 3;
+                }
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 1){
+                    return 5;
+                }
+                else if( a === 8){
+                    return 6;
+                }
+                else if( a === 5){
+                    return 7;
+                }
+                else if( a === 2){
+                    return 8;
+                }
+
+        }
+        
+        /*rotates the index back to the current game state form
+        * @Param [int]
+        */
+          function reverse180(a){
+                if( a === 8){
+                    return 0;
+                }
+                else if( a === 7){
+                    return 1;
+                }
+                else if (a === 6){
+                    return 2;
+                }
+                else if( a === 5){
+                    return 3;
+                }
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 3){
+                    return 5;
+                }
+                else if( a === 2){
+                    return 6;
+                }
+                else if( a === 1){
+                    return 7;
+                }
+                else if( a === 0){
+                    return 8;
+                }
+
+        }
+        
+        /*rotates the index back to the current game state form
+        * @Param [int]
+        */
+          function reverseReflectHorizontal(a){
+                if( a === 6){
+                    return 0;
+                }
+                else if( a === 7){
+                    return 1;
+                }
+                else if (a === 8){
+                    return 2;
+                }
+                else if( a === 3){
+                    return 3;
+                }
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 5){
+                    return 5;
+                }
+                else if( a === 0){
+                    return 6;
+                }
+                else if( a === 1){
+                    return 7;
+                }
+                else if( a === 2){
+                    return 8;
+                }
+
+        }
+        
+         /*rotates the index back to the current game state form
+        * @Param [int]
+        */
+          function reverseReflectVertical(a){
+                if( a === 2){
+                    return 0;
+                }
+                else if( a === 1){
+                    return 1;
+                }
+                else if (a === 0){
+                    return 2;
+                }
+                else if( a === 5){
+                    return 3;
+                }
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 3){
+                    return 5;
+                }
+                else if( a === 8){
+                    return 6;
+                }
+                else if( a === 7){
+                    return 7;
+                }
+                else if( a === 6){
+                    return 8;
+                }
+
+        }
+       /*rotates the index back to the current game state form
+        * @Param [int]
+        */
+          function reverseLeft90andReflectHorizontal(a){
+                if( a === 8){
+                    return 0;
+                }
+                else if( a === 5){
+                    return 1;
+                }
+                else if (a === 2){
+                    return 2;
+                }
+                else if( a === 7){
+                    return 3;
+                }
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 1){
+                    return 5;
+                }
+                else if( a === 6){
+                    return 6;
+                }
+                else if( a === 3){
+                    return 7;
+                }
+                else if( a === 0){
+                    return 8;
+                }
+
+        }
+      /*rotates the index back to the current game state form
+        * @Param [int]
+        */
+          function reverseRight90andReflectVertical(a){
+                if( a === 0){
+                    return 0;
+                }
+                else if( a === 3){
+                    return 1;
+                }
+                else if (a === 6){
+                    return 2;
+                }
+                else if( a === 1){
+                    return 3;
+                }
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 7){
+                    return 5;
+                }
+                else if( a === 2){
+                    return 6;
+                }
+                else if( a === 5){
+                    return 7;
+                }
+                else if( a === 8){
+                    return 8;
+                }
+
+        }
+            /*rotates the index back to the current game state form
+        * @Param [int]
+        */
+          function reverse180andReflectHorizontal(a){
+                if( a === 2){
+                    return 0;
+                }
+                else if( a === 1){
+                    return 1;
+                }
+                else if (a === 6){
+                    return 2;
+                }
+                else if( a === 5){
+                    return 3;
+                }
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 3){
+                    return 5;
+                }
+                else if( a === 8){
+                    return 6;
+                }
+                else if( a === 7){
+                    return 7;
+                }
+                else if( a === 0){
+                    return 8;
+                }
+
+        }
+        
 		console.log("=================ROTATIONS=============================");
 		console.log("Original Input");
 		console.log(compare);
@@ -302,105 +578,243 @@ var AI = function(level) {
 		console.log(rotate180andReflectHorizontal());
 		console.log(rotate180andReflectHorizontal().toString());
 		console.log("=================ROTATIONS=============================");
-  
+        
+        
+      
+        var next;
+        
 		for(i = 0; i < boardArray.length; i++){
+            
+            //if its the same as a state in the array
 			if (compare === boardArray[i].toString()){
                 //console.log(i);
-				//do stuff here if the state is found
-				//console.log("poopy butts");
+                var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                        //console.log("its met");
+                    }
+                }
+                var action = new AIAction(j);
+
+                next = action.applyTo(game.currentState);
+            
+                ui.insertAt(j, turn);
+            
+
 				break;
 			}
+            
+            //if its the same as a state in the array rotated 90 Right
 			else if (rotateRight90().toString() === boardArray[i].toString()){
                 //console.log(i);
-				//do stuff here if the state is found
-				console.log("rotateRight90");
+               var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                      
+                    }
+                }
+                var boardPlace = reverseRight90(j);
+                var action = new AIAction(boardPlace);
+                next = action.applyTo(game.currentState);
+                ui.insertAt(boardPlace, turn);
+                console.log("rotateRight90");
 				break;
+				
 			}
+            
+            
+             //if its the same as a state in the array rotated 90 Left
 			else if (rotateLeft90().toString() === boardArray[i].toString()){
 				//console.log(i);
-                //do stuff here if the state is found
+                var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                      
+                    }
+                }
+                var boardPlace = reverseLeft90(j);
+                var action = new AIAction(boardPlace);
+                next = action.applyTo(game.currentState);
+                ui.insertAt(boardPlace, turn);
 				console.log("rotateLeft90");
 				break;
 			}
+            
+            
+            //if its the same as a state in the array rotated 180
 			else if (rotate180().toString() === boardArray[i].toString()){
-				//console.log(i);
-                //do stuff here if the state is found
+					//console.log(i);
+                var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                      
+                    }
+                }
+                var boardPlace = reverse180(j);
+                var action = new AIAction(boardPlace);
+                next = action.applyTo(game.currentState);
+                ui.insertAt(boardPlace, turn);
 				console.log("rotate180");
 				break;
 			}
+            
+            
+            //if its the same as a state in the array reflected horizontally
 			else if (reflectHorizontal().toString() === boardArray[i].toString()){
-				//console.log(i);
-                //do stuff here if the state is found
+						//console.log(i);
+                var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                      
+                    }
+                }
+                var boardPlace = reverseReflectHorizontal(j);
+                var action = new AIAction(boardPlace);
+                next = action.applyTo(game.currentState);
+                ui.insertAt(boardPlace, turn);
 				console.log("reflectHorizontal");
 				break;
 			}
+            
+            
+            //if its the same as a state in the array reflected vertically
 			else if (reflectVertical().toString() === boardArray[i].toString()){
-				//console.log(i);
-                //do stuff here if the state is found
+							//console.log(i);
+                var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                      
+                    }
+                }
+                var boardPlace = reverseReflectVertical(j);
+                var action = new AIAction(boardPlace);
+                next = action.applyTo(game.currentState);
+                ui.insertAt(boardPlace, turn);
 				console.log("reflectVertical");
 				break;
 			}
+            
+            
+            //if its the same as a state in the array rotated left 90 and reflected horizontally
 			else if (rotateLeft90andReflectHorizontal().toString() === boardArray[i].toString()){
-				//console.log(i);
-                //do stuff here if the state is found
+							//console.log(i);
+                var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                      
+                    }
+                }
+                var boardPlace = reverseLeft90andReflectHorizontal(j);
+                var action = new AIAction(boardPlace);
+                next = action.applyTo(game.currentState);
+                ui.insertAt(boardPlace, turn);
 				console.log("rotateLeft90andReflectHorizontal");
 				break;
 			}
+            
+            
+            //if its the same as a state in the array rotated right 90 and reflected vertically
 			else if (rotateRight90andReflectVertical().toString() === boardArray[i].toString()){
-				//console.log(i);
-                //do stuff here if the state is found
+							//console.log(i);
+                var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                      
+                    }
+                }
+                var boardPlace = reverseRight90andReflectVertical(j);
+                var action = new AIAction(boardPlace);
+                next = action.applyTo(game.currentState);
+                ui.insertAt(boardPlace, turn);
 				console.log("rotateRight90andReflectVertical");
 				break;
 			}
+            
+            
+            //if its the same as a state in the array rotated 180 and reflected horizontally    
 			else if (rotate180andReflectHorizontal().toString() === boardArray[i].toString()){
-				//console.log(i);
-                //do stuff here if the state is found
+							//console.log(i);
+                var testing =  beadIntArray[i].reduce(add, 0);
+                //console.log(testing);
+                var cumulativeProbability = 0;
+                var p = Math.floor(Math.random() * testing) + 1;
+                //console.log(p);
+                for(var j = 0; j < beadIntArray[i].length; j++){
+                    cumulativeProbability += beadIntArray[i][j];
+                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                            console.log(j);
+                        break;
+                      
+                    }
+                }
+                var boardPlace = reverse180andReflectHorizontal(j);
+                var action = new AIAction(boardPlace);
+                next = action.applyTo(game.currentState);
+                ui.insertAt(boardPlace, turn);
 				console.log("rotate180andReflectHorizontal");
 				break;
 			}
 		}
 		console.log(i);
         
-        //sumple adder function    
-        function add(a, b){
-            return a + b;
-        }
-        
-        /*var menaceBoard = beadIntArray[i]
-        var testing = menaceBoard.reduce(add, 0);
-        console.log(testing);
-        var cumulativeProbability = 0;
-        var p = Math.floor(Math.random() * testing) + 1;
-        console.log(p);
-          for(var j = 0; j < beadIntArray[i].length; j++){
-                 cumulativeProbability += beadIntArray[i][j];
-                    if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                        console.log(beadIntArray[i][j]);
-                        //console.log("its met");
-                    }
-                }*/
-        
+        game.advanceTo(next);
 		//rotation courtesy of PHS Learning Winning Strategies in Games 200/5 Chapter 3 Page 17-10
-        /*
-*  Create a state or 'box' for each new state found and place beads within the box
-*/
-
-/*
-*  Check to see if there is a box that already exists before creating
-/*
-
-/*
-*  make a list of all boxes used within a game then make appropriate changes to each when a winning state 
-*  has been reached  can use this.isTerminal function from game class
-*/
-
-/*
-*  can use the this.turn - 1 to see what turn the box is from and use the board array to check what symbols  *  are where
-*/
-
-/*
-* generally alot of constructors and functions from game can be taken and adapted into 
-*/
     };
     
       /*
@@ -428,6 +842,8 @@ var AI = function(level) {
      */
     function takeAMasterMove(turn) {
         var available = game.currentState.emptyCells();
+        
+        console.log(game.currentState.board.toString());
         //enumerate and calculate the score for each avaialable actions to the ai player
         var availableActions = available.map(function(pos) {
             var action =  new AIAction(pos); //create the action object

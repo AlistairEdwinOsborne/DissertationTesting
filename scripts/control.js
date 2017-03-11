@@ -96,7 +96,7 @@ $(".restart").click(function(){
 
 /*
  * click on cell (onclick div.cell) behavior and control
- * if an empty cell is clicked when the game is running and its the human player's trun
+ * if an empty cell is clicked when the game is running and its the human player's turn
  * get the indecies of the clicked cell, create the next game state, update the UI, and
  * advance the game to the new created state
  */
@@ -105,7 +105,7 @@ $(".restart").click(function(){
      $this.click(function() {
          if(globals.game.status === "running" && globals.game.currentState.turn === "X" && !$this.hasClass('occupied')) {
              var indx = parseInt($this.data("indx"));
-             
+             console.log(globals.game.currentState.board.toString());
              var next = new State(globals.game.currentState);
              next.board[indx] = "X";
             
@@ -116,29 +116,7 @@ $(".restart").click(function(){
              
              globals.game.advanceTo(next);
              console.log(next);
+             
          }
      })
  });
-
- /*$(".cell").each(function() {
-     var $this = $(this);
-     $this.click(function() {
-         if(globals.game.status === "running" && globals.game.currentState.turn === "O" && !$this.hasClass('occupied')) {
-             var indx = parseInt($this.data("indx"));
-
-             var next = new State(globals.game.currentState);
-             next.board[indx] = "O";
-
-             ui.insertAt(indx, "O");
-             
-             console.log(indx);
-
-             next.advanceTurn();
-
-             globals.game.advanceTo(next);
-
-         }
-     })
- }); */
-
-

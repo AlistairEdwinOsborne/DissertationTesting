@@ -580,12 +580,13 @@ var AI = function(level) {
 		console.log(rotate180andReflectHorizontal().toString());
 		console.log("=================ROTATIONS=============================");
         
-        
       
         var next;
         
 		for(i = 0; i < boardArray.length; i++){
-            
+                for (var q = 0; q < 9; q++){
+                    ui.insertBead(q, beadIntArray[i][q]);
+                    }
             //if its the same as a state in the array
 			if (compare === boardArray[i].toString()){
                 //console.log(i);
@@ -594,7 +595,10 @@ var AI = function(level) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
+                
+                beadIntArray[i]
                 for(var j = 0; j < beadIntArray[i].length; j++){
+                    
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);

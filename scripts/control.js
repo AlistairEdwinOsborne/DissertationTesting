@@ -43,7 +43,7 @@ $(".start").click(function() {
         globals.game = new Game(aiPlayer);
 
         aiPlayer.plays(globals.game);
-        
+        console.log(ai.level);
         globals.game.start();
     }
 });
@@ -89,7 +89,6 @@ $(".restart").click(function(){
         globals.game = new Game(aiPlayer);
 
         aiPlayer.plays(globals.game);
-
         globals.game.start();
     }
 });

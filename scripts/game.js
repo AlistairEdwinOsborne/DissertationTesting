@@ -159,19 +159,21 @@ var Game = function(autoPlayer) {
     this.advanceTo = function(_state) {
         this.currentState = _state;
         if(_state.isTerminal()) {
-            alert("ROBOTO LOOSE");
+            
             this.status = "ended";
              //return onendCall(this.currentState);
-            if(_state.result === "X-winningstate")
+            if(_state.result === "X-winningstate"){
                 //X won 
-                ui.switchViewTo("winningstate");
-            
-            else if(_state.result === "O-winningstate")
+                ui.switchViewTo("won");
+                }
+            else if(_state.result === "O-winningstate"){
                 //X lost         
                 ui.switchViewTo("lost");
-            else
+                }
+            else{
                 //it's a draw
                 ui.switchViewTo("drawingstate");
+                }
         }
         else {
             //the game is ongoing

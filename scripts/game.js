@@ -157,13 +157,13 @@ var Game = function(autoPlayer) {
         
   this.rewardMenaceWin = function(){
         console.log("======LOOP=STARTS=HERE========");
-        for( var n = 0; n < rewards.length; n += 2){
+        for(var n = 0; n < rewards.length; n += 2){
             var winIndex1 = 0;
             var winIndex2 = 0;
             var win = 0;
             winIndex1 = rewards[n];
             console.log(winIndex1);
-            index2 = rewards[n + 1];
+            winIndex2 = rewards[n + 1];
             console.log(winIndex2);
             win = beadIntArray[winIndex1][winIndex2] + 3;
             console.log(win);
@@ -175,7 +175,7 @@ var Game = function(autoPlayer) {
   
   this.rewardMenaceLoss = function(){
         console.log("======LOOP=STARTS=HERE========");
-        for( var n = 0; n < rewards.length; n += 2){
+        for(var n = 0; n < rewards.length; n += 2){
             var lossIndex1 = 0;
             var lossIndex2 = 0;
             var loss = 0;
@@ -198,7 +198,7 @@ var Game = function(autoPlayer) {
   
   this.rewardMenaceDraw = function(){
      console.log("======LOOP=STARTS=HERE========");
-        for( var n = 0; n < rewards.length; n += 2){
+        for(var n = 0; n < rewards.length; n += 2){
             var drawIndex1 = 0;
             var drawIndex2 = 0;
             var draw = 0;
@@ -225,7 +225,8 @@ var Game = function(autoPlayer) {
             this.status = "ended";
              //return onendCall(this.currentState);
             if(_state.result === "X-winningstate"){
-                //X won 
+                //X won
+                   document.getElementById("menace-skull").style.backgroundImage = "url('../imgs/menacecrying.jpg')";
                 console.log("MENACE LOST");
                 console.log(rewards);
                 this.rewardMenaceLoss();
@@ -236,6 +237,7 @@ var Game = function(autoPlayer) {
                 }
             else if(_state.result === "O-winningstate"){
                 //X lost
+                   document.getElementById("menace-skull").style.backgroundImage = "url('../imgs/menacelaughing.png')";
                 console.log("MENACE WON");
                 console.log(rewards);
                 this.rewardMenaceWin();
@@ -246,6 +248,7 @@ var Game = function(autoPlayer) {
                 }
             else{
                 //it's a draw
+                   document.getElementById("menace-skull").style.backgroundImage = "url('../imgs/menacelaughing.png')";
                 console.log("MENACE DREW");
                 console.log(rewards);
                 this.rewardMenaceDraw();

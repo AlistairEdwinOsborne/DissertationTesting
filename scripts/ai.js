@@ -592,6 +592,7 @@ function sleepFor(sleepDuration) {
         var next;
         
 		for(i = 0; i < boardArray.length; i++){
+            var j = 0;
                 for (var q = 0; q < 9; q++){
                     ui.insertBead(q, beadIntArray[i][q]);
                     }
@@ -603,7 +604,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
+                for(j = 0; j < beadIntArray[i].length; j++){
                     
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
@@ -677,7 +678,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
+                for(j = 0; j < beadIntArray[i].length; j++){
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
@@ -720,7 +721,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
+                for(j = 0; j < beadIntArray[i].length; j++){
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
@@ -763,7 +764,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
+                for(j = 0; j < beadIntArray[i].length; j++){
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
@@ -804,7 +805,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
+                for(j = 0; j < beadIntArray[i].length; j++){
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
@@ -846,7 +847,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
+                for(j = 0; j < beadIntArray[i].length; j++){
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
@@ -889,7 +890,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
+                for(j = 0; j < beadIntArray[i].length; j++){
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
@@ -931,7 +932,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
+                for(j = 0; j < beadIntArray[i].length; j++){
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);

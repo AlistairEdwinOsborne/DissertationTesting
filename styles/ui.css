@@ -92,6 +92,8 @@ body {
 .board {
     
     border: 10px solid transparent;
+    margin-left: -65px;
+    postion: absolute;
     float: left;
     height: 420px;
     width: 420px;
@@ -105,6 +107,9 @@ body {
 
 .board2 {
     float: right;
+    postion: absolute;
+    margin-right: -60px;
+    margin-top: -500px;
     border: 10px solid transparent;
     height: 420px;
     width: 420px;
@@ -153,7 +158,13 @@ body {
     margin-top: 200px;
 	color: RED;
 }
+.menace-skull {
+    margin: auto;
 
+    width: 500px;
+    positon: static;
+    height: 500px;
+}
 .level1 {
     margin: 0 15px;
     color: RED;

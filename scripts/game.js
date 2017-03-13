@@ -183,9 +183,14 @@ var Game = function(autoPlayer) {
             console.log(lossIndex1);
             lossIndex2 = rewards[n + 1];
             console.log(lossIndex2);
-            loss = beadIntArray[lossIndex1][lossIndex2] - 1;
-            console.log(loss);
-            beadIntArray[lossIndex1].splice(lossIndex2, 1, loss);  
+            if(beadIntArray[lossIndex1][lossIndex2] === 0){
+                /* do nothing */
+            }
+            else{
+                loss = beadIntArray[lossIndex1][lossIndex2] - 1;
+                console.log(loss);
+                beadIntArray[lossIndex1].splice(lossIndex2, 1, loss);
+            }
         }
       console.log("=======LOOP=ENDS=HERE=========");
 

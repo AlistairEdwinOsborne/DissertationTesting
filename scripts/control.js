@@ -17,7 +17,18 @@ var flags = {
  * is set to the chosen level
  */
 
-$(".level").each(function() {
+$(".level1").each(function() {
+    var $this = $(this);
+    $this.click(function() {
+        $('.selected').toggleClass('not-selected');
+        $('.selected').toggleClass('selected');
+        $this.toggleClass('not-selected');
+        $this.toggleClass('selected');
+        ai.level = $this.attr("id");
+    });
+});
+
+$(".level2").each(function() {
     var $this = $(this);
     $this.click(function() {
         $('.selected').toggleClass('not-selected');
@@ -109,13 +120,12 @@ $(".restart").click(function(){
              next.board[indx] = "X";
             
              ui.insertAt(indx, "X");
-         
              //console.log(indx);
              next.advanceTurn();
              
              globals.game.advanceTo(next);
              console.log(next);
-             
+            
          }
      })
  });

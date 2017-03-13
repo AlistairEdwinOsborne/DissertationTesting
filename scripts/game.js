@@ -1,3 +1,6 @@
+/* Total number of menace games played without reset
+*/
+var counter = 0;
 /* A State within the game
 */
 var State = function(old) {
@@ -151,6 +154,60 @@ var Game = function(autoPlayer) {
                     }
                 }
             }
+        
+  this.rewardMenaceWin = function(){
+        console.log("======LOOP=STARTS=HERE========");
+        for( var n = 0; n < rewards.length; n += 2){
+            var winIndex1 = 0;
+            var winIndex2 = 0;
+            var win = 0;
+            winIndex1 = rewards[n];
+            console.log(winIndex1);
+            index2 = rewards[n + 1];
+            console.log(winIndex2);
+            win = beadIntArray[winIndex1][winIndex2] + 3;
+            console.log(win);
+            beadIntArray[winIndex1].splice(winIndex2, 1, win);  
+        }
+      console.log("=======LOOP=ENDS=HERE=========");
+
+    }
+  
+  this.rewardMenaceLoss = function(){
+        console.log("======LOOP=STARTS=HERE========");
+        for( var n = 0; n < rewards.length; n += 2){
+            var lossIndex1 = 0;
+            var lossIndex2 = 0;
+            var loss = 0;
+            lossIndex1 = rewards[n];
+            console.log(lossIndex1);
+            lossIndex2 = rewards[n + 1];
+            console.log(lossIndex2);
+            loss = beadIntArray[lossIndex1][lossIndex2] - 1;
+            console.log(loss);
+            beadIntArray[lossIndex1].splice(lossIndex2, 1, loss);  
+        }
+      console.log("=======LOOP=ENDS=HERE=========");
+
+  }
+  
+  this.rewardMenaceDraw = function(){
+     console.log("======LOOP=STARTS=HERE========");
+        for( var n = 0; n < rewards.length; n += 2){
+            var drawIndex1 = 0;
+            var drawIndex2 = 0;
+            var draw = 0;
+            drawIndex1 = rewards[n];
+            console.log(drawIndex1);
+            drawIndex2 = rewards[n + 1];
+            console.log(drawIndex2);
+            draw = beadIntArray[drawIndex1][drawIndex2] + 1;
+            console.log(draw);
+            beadIntArray[drawIndex1].splice(drawIndex2, 1, draw);  
+        }
+      console.log("=======LOOP=ENDS=HERE=========");
+ 
+  }
 
     /*
      * public function that advances the game to a new state
@@ -158,7 +215,42 @@ var Game = function(autoPlayer) {
      */
     this.advanceTo = function(_state) {
         this.currentState = _state;
-        if(_state.isTerminal()) {
+        if(_state.isTerminal() && ai.level === "menace"){
+            counter++;
+            this.status = "ended";
+             //return onendCall(this.currentState);
+            if(_state.result === "X-winningstate"){
+                //X won 
+                console.log("MENACE LOST");
+                console.log(rewards);
+                this.rewardMenaceLoss();
+                rewards = [];
+                console.log(rewards);
+                ui.switchViewTo("won");
+                document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                }
+            else if(_state.result === "O-winningstate"){
+                //X lost
+                console.log("MENACE WON");
+                console.log(rewards);
+                this.rewardMenaceWin();
+                rewards = [];
+                console.log(rewards);
+                ui.switchViewTo("lost");
+                document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                }
+            else{
+                //it's a draw
+                console.log("MENACE DREW");
+                console.log(rewards);
+                this.rewardMenaceDraw();
+                rewards = [];
+                console.log(rewards);
+                ui.switchViewTo("drawingstate");
+                document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                }    
+        }
+        else if(_state.isTerminal()) {
             
             this.status = "ended";
              //return onendCall(this.currentState);

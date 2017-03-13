@@ -153,7 +153,6 @@ var AI = function(level) {
             });
           
     };
-
     
     function takeMenaceMove(turn){
         //var plot = new State(game.currentState.board);
@@ -550,7 +549,7 @@ var AI = function(level) {
                 }
 
         }
-        
+        /*
 		console.log("=================ROTATIONS=============================");
 		console.log("Original Input");
 		console.log(compare);
@@ -579,8 +578,17 @@ var AI = function(level) {
 		console.log(rotate180andReflectHorizontal());
 		console.log(rotate180andReflectHorizontal().toString());
 		console.log("=================ROTATIONS=============================");
+       */ 
         
-      
+function sleepFor(sleepDuration) {
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){
+        document.getElementById('thinking').innerHTML = "SHHH HES THINKING!!";
+        /* DO MENACE THINKING ANIMATION! */
+    }
+    //document.getElementById('thinking').innerHTML = "";
+}
+
         var next;
         
 		for(i = 0; i < boardArray.length; i++){
@@ -595,8 +603,6 @@ var AI = function(level) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                
-                beadIntArray[i]
                 for(var j = 0; j < beadIntArray[i].length; j++){
                     
                     cumulativeProbability += beadIntArray[i][j];
@@ -605,14 +611,19 @@ var AI = function(level) {
                         break;
                     }
                 }
-                var action = new AIAction(j);
-                rewards.push(i,j);
-                console.log(rewards);
-                next = action.applyTo(game.currentState);
-                ui.insertAt(j, turn);
-            
-                game.advanceTo(next);
-				break;
+                if(cumulativeProbability === 0) {
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    console.log("RANDOM MOVE!!");
+                }
+                    var action = new AIAction(j);
+                    rewards.push(i,j);
+                    next = action.applyTo(game.currentState);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+                    break;
+                
 			}
             
             //if its the same as a state in the array rotated 90 Right
@@ -631,16 +642,30 @@ var AI = function(level) {
                       
                     }
                 }
-                var boardPlace = reverseRight90(j);
-                var action = new AIAction(boardPlace);
-                rewards.push(i,j);
-                console.log(rewards);
-                next = action.applyTo(game.currentState);
-                ui.insertAt(boardPlace, turn);
-                game.advanceTo(next);
-                console.log("rotateRight90");
-				break;
-				
+               if(cumulativeProbability === 0) {
+                   console.log("RANDOM MOVE!!");
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    var action = new AIAction(j);
+                    rewards.push(i,j);
+                    next = action.applyTo(game.currentState);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+                    console.log("rotateRight90");
+                    break;
+                }
+                else{
+                    var boardPlace = reverseRight90(j);
+                    var action = new AIAction(boardPlace);
+                    rewards.push(i,j);
+                    next = action.applyTo(game.currentState);
+                    //sleepFor(2000);
+                    ui.insertAt(boardPlace, turn);
+                    game.advanceTo(next);
+                    console.log("rotateRight90");
+                    break;
+                }
 			}
             
             
@@ -660,16 +685,31 @@ var AI = function(level) {
                       
                     }
                 }
-                var boardPlace = reverseLeft90(j);
-                var action = new AIAction(boardPlace);
-                next = action.applyTo(game.currentState);
-                rewards.push(i,j);
-                console.log(rewards);
-                ui.insertAt(boardPlace, turn);
-                game.advanceTo(next);
-				console.log("rotateLeft90");
-				break;
-			}
+                if(cumulativeProbability === 0) {
+                    console.log("RANDOM MOVE!!");
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    var action = new AIAction(j);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+                    console.log("rotateLeft90");
+                    break;
+                }
+                else{
+                    var boardPlace = reverseLeft90(j);
+                    var action = new AIAction(boardPlace);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(boardPlace, turn);
+                    game.advanceTo(next);
+                    console.log("rotateLeft90");
+                    break;
+                }  
+            }
             
             
             //if its the same as a state in the array rotated 180
@@ -688,15 +728,30 @@ var AI = function(level) {
                       
                     }
                 }
-                var boardPlace = reverse180(j);
-                var action = new AIAction(boardPlace);
-                next = action.applyTo(game.currentState);
-                rewards.push(i,j);
-                console.log(rewards);
-                ui.insertAt(boardPlace, turn);
-                game.advanceTo(next);
-				console.log("rotate180");
-				break;
+                if(cumulativeProbability === 0) {
+                    console.log("RANDOM MOVE!!");
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    var action = new AIAction(j);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+                    console.log("rotate180");
+                    break;
+                }
+                else{
+                    var boardPlace = reverse180(j);
+                    var action = new AIAction(boardPlace);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(boardPlace, turn);
+                    game.advanceTo(next);
+                    console.log("rotate180");
+                    break;
+                }
 			}
             
             
@@ -716,17 +771,30 @@ var AI = function(level) {
                       
                     }
                 }
-                var boardPlace = reverseReflectHorizontal(j);
-                var action = new AIAction(boardPlace);
-                next = action.applyTo(game.currentState);
-                rewards.push(i,j);
-                console.log(rewards);
-                ui.insertAt(boardPlace, turn);
-                game.advanceTo(next);
-				console.log("reflectHorizontal");
-				break;
-			}
-            
+               if(cumulativeProbability === 0) {
+                   console.log("RANDOM MOVE!!");
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    var action = new AIAction(j);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+                    console.log("reflectHorizontal");
+                    break;
+                }
+                else{ 
+                    var boardPlace = reverseReflectHorizontal(j);
+                    var action = new AIAction(boardPlace);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    ui.insertAt(boardPlace, turn);
+                    game.advanceTo(next);
+                    console.log("reflectHorizontal");
+                    break;
+                }
+            }
             
             //if its the same as a state in the array reflected vertically
 			else if (reflectVertical().toString() === boardArray[i].toString()){
@@ -741,18 +809,32 @@ var AI = function(level) {
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
                         break;
-                      
-                    }
+                        }
                 }
-                var boardPlace = reverseReflectVertical(j);
-                var action = new AIAction(boardPlace);
-                next = action.applyTo(game.currentState);
-                rewards.push(i,j);
-                console.log(rewards);
-                ui.insertAt(boardPlace, turn);
-                game.advanceTo(next);
-				console.log("reflectVertical");
-				break;
+                if(cumulativeProbability === 0) {
+                    console.log("RANDOM MOVE!!");
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    var action = new AIAction(j);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+                    console.log("reflectVertical");
+                    break;
+                }
+                else{
+                    var boardPlace = reverseReflectVertical(j);
+                    var action = new AIAction(boardPlace);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(boardPlace, turn);
+                    game.advanceTo(next);
+                    console.log("reflectVertical");
+                    break;
+                }
 			}
             
             
@@ -772,15 +854,30 @@ var AI = function(level) {
                       
                     }
                 }
-                var boardPlace = reverseLeft90andReflectHorizontal(j);
-                var action = new AIAction(boardPlace);
-                next = action.applyTo(game.currentState);
-                rewards.push(i,j);
-                console.log(rewards);
-                ui.insertAt(boardPlace, turn);
-                game.advanceTo(next);
-				console.log("rotateLeft90andReflectHorizontal");
-				break;
+                if(cumulativeProbability === 0) {
+                    console.log("RANDOM MOVE!!");
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    var action = new AIAction(j);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+				    console.log("rotateLeft90andReflectHorizontal");
+                    break;
+                }
+                else{
+                    var boardPlace = reverseLeft90andReflectHorizontal(j);
+                    var action = new AIAction(boardPlace);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(boardPlace, turn);
+                    game.advanceTo(next);
+				    console.log("rotateLeft90andReflectHorizontal");
+                    break;
+                }
 			}
             
             
@@ -800,15 +897,29 @@ var AI = function(level) {
                       
                     }
                 }
-                var boardPlace = reverseRight90andReflectVertical(j);
-                var action = new AIAction(boardPlace);
-                next = action.applyTo(game.currentState);
-                rewards.push(i,j);
-                console.log(rewards);
-                ui.insertAt(boardPlace, turn);
-                game.advanceTo(next);
-				console.log("rotateRight90andReflectVertical");
-				break;
+                if(cumulativeProbability === 0) {
+                    console.log("RANDOM MOVE!!");
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    var action = new AIAction(j);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+                    console.log("rotateRight90andReflectVertical");
+                    break;
+                }
+                else{
+                    var boardPlace = reverseRight90andReflectVertical(j);
+                    var action = new AIAction(boardPlace);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(boardPlace, turn);
+                    console.log("rotateRight90andReflectVertical");
+                    break;
+                }
 			}
             
             
@@ -824,19 +935,33 @@ var AI = function(level) {
                     cumulativeProbability += beadIntArray[i][j];
                         if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
                             console.log(j);
-                        break;
-                      
-                    }
+                        break; 
+                        }   
                 }
-                var boardPlace = reverse180andReflectHorizontal(j);
-                var action = new AIAction(boardPlace);
-                next = action.applyTo(game.currentState);
-                rewards.push(i,j);
-                console.log(rewards);
-                ui.insertAt(boardPlace, turn);
-                game.advanceTo(next);
-				console.log("rotate180andReflectHorizontal");
-				break;
+                if(cumulativeProbability === 0) {
+                    console.log("RANDOM MOVE!!");
+                    var available = game.currentState.emptyCells();
+                    j = available[Math.floor(Math.random() * available.length)];
+                    var action = new AIAction(j);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(j, turn);
+                    game.advanceTo(next);
+                    console.log("rotate180andReflectHorizontal");
+                    break;
+                }
+                else{
+                    var boardPlace = reverse180andReflectHorizontal(j);
+                    var action = new AIAction(boardPlace);
+                    next = action.applyTo(game.currentState);
+                    rewards.push(i,j);
+                    //sleepFor(2000);
+                    ui.insertAt(boardPlace, turn);
+                    game.advanceTo(next);
+                    console.log("rotate180andReflectHorizontal");
+                    break;
+                }
 			}
 		}
 		console.log(i);

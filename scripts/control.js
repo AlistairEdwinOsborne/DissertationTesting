@@ -55,7 +55,7 @@ $(".start").click(function() {
 
         aiPlayer.plays(globals.game);
         if(ai.level === "menace"){
-            document.getElementById("menace-skull").style.backgroundImage = "url('../imgs/menace.png')";
+            document.getElementById("menace-skull").style.backgroundImage = "url('imgs/menace.png')";
         }
         console.log(ai.level);
         globals.game.start();
@@ -104,7 +104,7 @@ $(".restart").click(function(){
 
         aiPlayer.plays(globals.game);
         if(ai.level === "menace"){
-            document.getElementById("menace-skull").style.backgroundImage = "url('../imgs/menace.png')";
+            document.getElementById("menace-skull").style.backgroundImage = "url('imgs/menace.png')";
         }
         globals.game.start();
     }

@@ -163,6 +163,8 @@ var AI = function(level) {
 		var check = game.currentState.board;
 		var compare = check.toString();
 		var i;
+        var j = 0;
+        var next;
 		function rotateRight90(){
 			var checker1 = ["E","E","E","E","E","E","E","E","E"];
 			checker1.splice(0, 1,check[6]);
@@ -589,15 +591,14 @@ function sleepFor(sleepDuration) {
     //document.getElementById('thinking').innerHTML = "";
 }
 
-        var next;
-        
 		for(i = 0; i < boardArray.length; i++){
-            var j = 0;
-                for (var q = 0; q < 9; q++){
-                    ui.insertBead(q, beadIntArray[i][q]);
-                    }
+ 
+            
             //if its the same as a state in the array
 			if (compare === boardArray[i].toString()){
+                for (var q = 0; q < 9; q++){
+                    ui.insertBead(q, beadIntArray[i][q]);
+                }
                 //console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -629,6 +630,17 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array rotated 90 Right
 			else if (rotateRight90().toString() === boardArray[i].toString()){
+                //add beads to menace board
+                        ui.insertBead(0, beadIntArray[i][6]);
+                        ui.insertBead(1, beadIntArray[i][3]);
+                        ui.insertBead(2, beadIntArray[i][0]);
+                        ui.insertBead(3, beadIntArray[i][7]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(5, beadIntArray[i][1]);
+                        ui.insertBead(6, beadIntArray[i][8]);
+                        ui.insertBead(7, beadIntArray[i][5]);  
+                        ui.insertBead(8, beadIntArray[i][2]);
+                    
                 //console.log(i);
                var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -672,6 +684,15 @@ function sleepFor(sleepDuration) {
             
              //if its the same as a state in the array rotated 90 Left
 			else if (rotateLeft90().toString() === boardArray[i].toString()){
+                        ui.insertBead(0, beadIntArray[i][2]);
+                        ui.insertBead(1, beadIntArray[i][5]);
+                        ui.insertBead(2, beadIntArray[i][8]);
+                        ui.insertBead(3, beadIntArray[i][1]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(5, beadIntArray[i][7]);
+                        ui.insertBead(6, beadIntArray[i][0]);
+                        ui.insertBead(7, beadIntArray[i][3]);  
+                        ui.insertBead(8, beadIntArray[i][6]);
 				//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -715,6 +736,15 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array rotated 180
 			else if (rotate180().toString() === boardArray[i].toString()){
+                        ui.insertBead(0, beadIntArray[i][8]);
+                        ui.insertBead(1, beadIntArray[i][7]);
+                        ui.insertBead(2, beadIntArray[i][6]);
+                        ui.insertBead(3, beadIntArray[i][5]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(5, beadIntArray[i][3]);
+                        ui.insertBead(6, beadIntArray[i][2]);
+                        ui.insertBead(7, beadIntArray[i][1]);  
+                        ui.insertBead(8, beadIntArray[i][0]);
 					//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -758,6 +788,15 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array reflected horizontally
 			else if (reflectHorizontal().toString() === boardArray[i].toString()){
+                        ui.insertBead(0, beadIntArray[i][6]);
+                        ui.insertBead(1, beadIntArray[i][7]);
+                        ui.insertBead(2, beadIntArray[i][8]);
+                        ui.insertBead(3, beadIntArray[i][3]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(5, beadIntArray[i][5]);
+                        ui.insertBead(6, beadIntArray[i][0]);
+                        ui.insertBead(7, beadIntArray[i][1]);  
+                        ui.insertBead(8, beadIntArray[i][2]);
 						//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -799,6 +838,15 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array reflected vertically
 			else if (reflectVertical().toString() === boardArray[i].toString()){
+                        ui.insertBead(0, beadIntArray[i][2]);
+                        ui.insertBead(1, beadIntArray[i][1]);
+                        ui.insertBead(2, beadIntArray[i][0]);
+                        ui.insertBead(3, beadIntArray[i][5]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(5, beadIntArray[i][3]);
+                        ui.insertBead(6, beadIntArray[i][8]);
+                        ui.insertBead(7, beadIntArray[i][7]);  
+                        ui.insertBead(8, beadIntArray[i][6]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -841,6 +889,15 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array rotated left 90 and reflected horizontally
 			else if (rotateLeft90andReflectHorizontal().toString() === boardArray[i].toString()){
+                        ui.insertBead(0, beadIntArray[i][8]);
+                        ui.insertBead(1, beadIntArray[i][5]);
+                        ui.insertBead(2, beadIntArray[i][2]);
+                        ui.insertBead(3, beadIntArray[i][7]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(5, beadIntArray[i][1]);
+                        ui.insertBead(6, beadIntArray[i][6]);
+                        ui.insertBead(7, beadIntArray[i][3]);  
+                        ui.insertBead(8, beadIntArray[i][0]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -884,6 +941,15 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array rotated right 90 and reflected vertically
 			else if (rotateRight90andReflectVertical().toString() === boardArray[i].toString()){
+                        ui.insertBead(0, beadIntArray[i][0]);
+                        ui.insertBead(1, beadIntArray[i][3]);
+                        ui.insertBead(2, beadIntArray[i][6]);
+                        ui.insertBead(3, beadIntArray[i][1]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(5, beadIntArray[i][7]);
+                        ui.insertBead(6, beadIntArray[i][2]);
+                        ui.insertBead(7, beadIntArray[i][5]);  
+                        ui.insertBead(8, beadIntArray[i][8]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -927,6 +993,15 @@ function sleepFor(sleepDuration) {
             //if its the same as a state in the array rotated 180 and reflected horizontally    
 			else if (rotate180andReflectHorizontal().toString() === boardArray[i].toString()){
 							//console.log(i);
+                        ui.insertBead(0, beadIntArray[i][2]);
+                        ui.insertBead(1, beadIntArray[i][1]);
+                        ui.insertBead(2, beadIntArray[i][6]);
+                        ui.insertBead(3, beadIntArray[i][5]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(5, beadIntArray[i][5]);
+                        ui.insertBead(6, beadIntArray[i][0]);
+                        ui.insertBead(7, beadIntArray[i][1]);  
+                        ui.insertBead(8, beadIntArray[i][2]);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
@@ -965,7 +1040,7 @@ function sleepFor(sleepDuration) {
                 }
 			}
 		}
-		console.log(i);
+		console.log("1st Index for Bead Array " + i);
         
         
 		//rotation courtesy of PHS Learning Winning Strategies in Games 200/5 Chapter 3 Page 17-10

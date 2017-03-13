@@ -4,12 +4,29 @@
 }
 
 h1{
-
     font-family: pixel;
     text-align: center;
     margin-top: 0px;
     color: red;
     font-size: 60px;
+}
+
+h2{
+    font-family: pixel;
+    text-align: center;
+    margin-top: -30px;
+    color: red;
+    font-size: 30px;
+    margin-left: 800px;
+}
+
+h3{
+    font-family: pixel;
+    text-align: center;
+    margin-top: -60px;
+    margin-right: 800px;
+    color: white;
+    font-size: 30px;
 }
 
 .main-container {
@@ -109,13 +126,13 @@ body {
     float: right;
     postion: absolute;
     margin-right: -60px;
-    margin-top: -500px;
+    margin-top: -510px;
     border: 10px solid transparent;
-    height: 420px;
-    width: 420px;
+    height: 450px;
+    width: 450px;
     /*margin-left: px;
-    margin-top: px ;*/
-    border-image: url("../imgs/board.png") 200 stretch; 
+    margin-top: px ;
+    border-image: url("../imgs/board.png") 200 stretch; */
 }
 
 .cell {
@@ -137,10 +154,11 @@ body {
 
 .bead {
  
-    width: 140px;
-    height: 140px;
-    background: url("../imgs/boardcell.png");
-    border-style: transparent;
+    width: 150px;
+    height: 150px;
+    background: url("../imgs/coin.png");
+    background-repeat: no-repeat;
+    border-style: 10px transparent;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -149,7 +167,7 @@ body {
     line-height: 140px;
     text-align: center;
     font-family: pixel;
-    font-size: 70px; 
+    font-size: 60px; 
 }
 .control {
     font-family: pixel;
@@ -167,7 +185,7 @@ body {
 }
 .level1 {
     margin: 0 15px;
-    color: RED;
+    color: white;
     cursor: pointer;
 }
 

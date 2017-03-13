@@ -87,6 +87,6 @@ ui.insertAt = function(indx, symbol) {
 ui.insertBead = function(indx, symbol) {
     var board = $('.bead');
     var targetCell = $(board[indx]);
-        targetCell.html(symbol);
-        targetCell.css({color : "yellow"});
+        targetCell.html("$" + symbol);
+        targetCell.css({color : "black"});
 }

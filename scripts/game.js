@@ -226,7 +226,7 @@ var Game = function(autoPlayer) {
              //return onendCall(this.currentState);
             if(_state.result === "X-winningstate"){
                 //X won
-                   document.getElementById("menace-skull").style.backgroundImage = "url('../imgs/menacecrying.jpg')";
+                   document.getElementById("menace-skull").style.backgroundImage = "url('imgs/menacecrying.png')";
                 console.log("MENACE LOST");
                 console.log(rewards);
                 this.rewardMenaceLoss();
@@ -237,7 +237,7 @@ var Game = function(autoPlayer) {
                 }
             else if(_state.result === "O-winningstate"){
                 //X lost
-                   document.getElementById("menace-skull").style.backgroundImage = "url('../imgs/menacelaughing.png')";
+                   document.getElementById("menace-skull").style.backgroundImage = "url('imgs/menacelaughing.png')";
                 console.log("MENACE WON");
                 console.log(rewards);
                 this.rewardMenaceWin();
@@ -248,7 +248,7 @@ var Game = function(autoPlayer) {
                 }
             else{
                 //it's a draw
-                   document.getElementById("menace-skull").style.backgroundImage = "url('../imgs/menacelaughing.png')";
+                   document.getElementById("menace-skull").style.backgroundImage = "url('imgs/menacelaughing.png')";
                 console.log("MENACE DREW");
                 console.log(rewards);
                 this.rewardMenaceDraw();

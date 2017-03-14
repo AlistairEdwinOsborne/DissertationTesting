@@ -984,6 +984,7 @@ function sleepFor(sleepDuration) {
                     rewards.push(i,j);
                     //sleepFor(2000);
                     ui.insertAt(boardPlace, turn);
+                    game.advanceTo(next);
                     console.log("rotateRight90andReflectVertical");
                     break;
                 }

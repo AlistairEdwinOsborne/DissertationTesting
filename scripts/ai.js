@@ -522,32 +522,32 @@ var AI = function(level) {
         * @Param [int]
         */
           function reverse180andReflectHorizontal(a){
-                if( a === 2){
-                    return 0;
+                if( a === 0){
+                    return 2;
                 }
                 else if( a === 1){
                     return 1;
                 }
-                else if (a === 6){
-                    return 2;
-                }
-                else if( a === 5){
-                    return 3;
-                }
-                else if( a === 4){
-                    return 4;
+                else if (a === 2){
+                    return 6;
                 }
                 else if( a === 3){
                     return 5;
                 }
-                else if( a === 8){
-                    return 6;
+                else if( a === 4){
+                    return 4;
+                }
+                else if( a === 5){
+                    return 3;
+                }
+                else if( a === 6){
+                    return 8;
                 }
                 else if( a === 7){
                     return 7;
                 }
-                else if( a === 0){
-                    return 8;
+                else if( a === 8){
+                    return 0;
                 }
 
         }
@@ -590,6 +590,37 @@ function sleepFor(sleepDuration) {
     }
     //document.getElementById('thinking').innerHTML = "";
 }
+        
+function makeMenaceMove(boardPlace){
+    var action = new AIAction(boardPlace);
+    next = action.applyTo(game.currentState);
+    rewards.push(i,j);
+    ui.insertAt(boardPlace, turn);
+    game.advanceTo(next);
+}
+
+function makeRandomMove(){
+    var available = game.currentState.emptyCells();
+    j = available[Math.floor(Math.random() * available.length)];
+    var action = new AIAction(j);
+    next = action.applyTo(game.currentState);
+    rewards.push(i,j);
+    //sleepFor(2000);
+    ui.insertAt(j, turn);
+    game.advanceTo(next);
+}
+
+function generateProbability(){
+    var p = Math.floor(Math.random() * testing) + 1;
+    //console.log(p);
+    for(j = 0; j < beadIntArray[i].length; j++){
+        cumulativeProbability += beadIntArray[i][j];
+            if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
+                console.log(j);
+                break; 
+                }   
+        }
+}
 
 		for(i = 0; i < boardArray.length; i++){
  
@@ -605,14 +636,7 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(j = 0; j < beadIntArray[i].length; j++){
-                    
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break;
-                    }
-                }
+                generateProbability();
                 if(cumulativeProbability === 0) {
                     var available = game.currentState.emptyCells();
                     j = available[Math.floor(Math.random() * available.length)];
@@ -631,51 +655,33 @@ function sleepFor(sleepDuration) {
             //if its the same as a state in the array rotated 90 Right
 			else if (rotateRight90().toString() === boardArray[i].toString()){
                 //add beads to menace board
-                        ui.insertBead(0, beadIntArray[i][6]);
-                        ui.insertBead(1, beadIntArray[i][3]);
-                        ui.insertBead(2, beadIntArray[i][0]);
-                        ui.insertBead(3, beadIntArray[i][7]);
+                        ui.insertBead(6, beadIntArray[i][0]);
+                        ui.insertBead(3, beadIntArray[i][1]);
+                        ui.insertBead(0, beadIntArray[i][2]);
+                        ui.insertBead(7, beadIntArray[i][3]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(5, beadIntArray[i][1]);
-                        ui.insertBead(6, beadIntArray[i][8]);
-                        ui.insertBead(7, beadIntArray[i][5]);  
-                        ui.insertBead(8, beadIntArray[i][2]);
+                        ui.insertBead(1, beadIntArray[i][5]);
+                        ui.insertBead(8, beadIntArray[i][6]);
+                        ui.insertBead(5, beadIntArray[i][7]);  
+                        ui.insertBead(2, beadIntArray[i][8]);            
                     
+                
                 //console.log(i);
                var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
-                //console.log(p);
-                for(var j = 0; j < beadIntArray[i].length; j++){
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break;
-                      
-                    }
-                }
+                //console.log(p); 
+                generateProbability();
+                console.log(cumulativeProbability);
                if(cumulativeProbability === 0) {
-                   console.log("RANDOM MOVE!!");
-                    var available = game.currentState.emptyCells();
-                    j = available[Math.floor(Math.random() * available.length)];
-                    var action = new AIAction(j);
-                    rewards.push(i,j);
-                    next = action.applyTo(game.currentState);
-                    //sleepFor(2000);
-                    ui.insertAt(j, turn);
-                    game.advanceTo(next);
-                    console.log("rotateRight90");
+                    console.log("RANDOM MOVE!!");
+                    makeRandomMove();
                     break;
                 }
                 else{
                     var boardPlace = reverseRight90(j);
-                    var action = new AIAction(boardPlace);
-                    rewards.push(i,j);
-                    next = action.applyTo(game.currentState);
-                    //sleepFor(2000);
-                    ui.insertAt(boardPlace, turn);
-                    game.advanceTo(next);
+                    makeMenaceMove(boardPlace); 
                     console.log("rotateRight90");
                     break;
                 }
@@ -684,50 +690,30 @@ function sleepFor(sleepDuration) {
             
              //if its the same as a state in the array rotated 90 Left
 			else if (rotateLeft90().toString() === boardArray[i].toString()){
-                        ui.insertBead(0, beadIntArray[i][2]);
-                        ui.insertBead(1, beadIntArray[i][5]);
-                        ui.insertBead(2, beadIntArray[i][8]);
-                        ui.insertBead(3, beadIntArray[i][1]);
+                        ui.insertBead(2, beadIntArray[i][0]);
+                        ui.insertBead(5, beadIntArray[i][1]);
+                        ui.insertBead(8, beadIntArray[i][3]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(5, beadIntArray[i][7]);
-                        ui.insertBead(6, beadIntArray[i][0]);
-                        ui.insertBead(7, beadIntArray[i][3]);  
-                        ui.insertBead(8, beadIntArray[i][6]);
+                        ui.insertBead(7, beadIntArray[i][5]);
+                        ui.insertBead(0, beadIntArray[i][6]);
+                        ui.insertBead(3, beadIntArray[i][7]);  
+                        ui.insertBead(6, beadIntArray[i][8]);               
 				//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(j = 0; j < beadIntArray[i].length; j++){
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break;
-                      
-                    }
-                }
+                generateProbability();
                 if(cumulativeProbability === 0) {
                     console.log("RANDOM MOVE!!");
-                    var available = game.currentState.emptyCells();
-                    j = available[Math.floor(Math.random() * available.length)];
-                    var action = new AIAction(j);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(j, turn);
-                    game.advanceTo(next);
+                    makeRandomMove();
                     console.log("rotateLeft90");
                     break;
                 }
                 else{
                     var boardPlace = reverseLeft90(j);
-                    var action = new AIAction(boardPlace);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(boardPlace, turn);
-                    game.advanceTo(next);
+                    makeMenaceMove(boardPlace);
                     console.log("rotateLeft90");
                     break;
                 }  
@@ -736,50 +722,31 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array rotated 180
 			else if (rotate180().toString() === boardArray[i].toString()){
-                        ui.insertBead(0, beadIntArray[i][8]);
-                        ui.insertBead(1, beadIntArray[i][7]);
-                        ui.insertBead(2, beadIntArray[i][6]);
-                        ui.insertBead(3, beadIntArray[i][5]);
-                        ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(5, beadIntArray[i][3]);
-                        ui.insertBead(6, beadIntArray[i][2]);
-                        ui.insertBead(7, beadIntArray[i][1]);  
                         ui.insertBead(8, beadIntArray[i][0]);
+                        ui.insertBead(7, beadIntArray[i][1]);
+                        ui.insertBead(6, beadIntArray[i][2]);
+                        ui.insertBead(5, beadIntArray[i][3]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(3, beadIntArray[i][5]);
+                        ui.insertBead(2, beadIntArray[i][6]);
+                        ui.insertBead(1, beadIntArray[i][7]);  
+                        ui.insertBead(0, beadIntArray[i][8]);
 					//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(j = 0; j < beadIntArray[i].length; j++){
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break;
-                      
-                    }
-                }
+                generateProbability();
                 if(cumulativeProbability === 0) {
                     console.log("RANDOM MOVE!!");
-                    var available = game.currentState.emptyCells();
-                    j = available[Math.floor(Math.random() * available.length)];
-                    var action = new AIAction(j);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(j, turn);
-                    game.advanceTo(next);
+                    makeRandomMove();
                     console.log("rotate180");
                     break;
                 }
                 else{
                     var boardPlace = reverse180(j);
-                    var action = new AIAction(boardPlace);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(boardPlace, turn);
-                    game.advanceTo(next);
+                    makeMenaceMove(boardPlace);
                     console.log("rotate180");
                     break;
                 }
@@ -788,49 +755,31 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array reflected horizontally
 			else if (reflectHorizontal().toString() === boardArray[i].toString()){
-                        ui.insertBead(0, beadIntArray[i][6]);
-                        ui.insertBead(1, beadIntArray[i][7]);
-                        ui.insertBead(2, beadIntArray[i][8]);
+                        ui.insertBead(6, beadIntArray[i][0]);
+                        ui.insertBead(7, beadIntArray[i][1]);
+                        ui.insertBead(8, beadIntArray[i][2]);
                         ui.insertBead(3, beadIntArray[i][3]);
                         ui.insertBead(4, beadIntArray[i][4]);
                         ui.insertBead(5, beadIntArray[i][5]);
-                        ui.insertBead(6, beadIntArray[i][0]);
-                        ui.insertBead(7, beadIntArray[i][1]);  
-                        ui.insertBead(8, beadIntArray[i][2]);
+                        ui.insertBead(0, beadIntArray[i][6]);
+                        ui.insertBead(1, beadIntArray[i][7]);  
+                        ui.insertBead(2, beadIntArray[i][8]);
 						//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(j = 0; j < beadIntArray[i].length; j++){
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break;
-                      
-                    }
-                }
+                generateProbability();
                if(cumulativeProbability === 0) {
                    console.log("RANDOM MOVE!!");
-                    var available = game.currentState.emptyCells();
-                    j = available[Math.floor(Math.random() * available.length)];
-                    var action = new AIAction(j);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(j, turn);
-                    game.advanceTo(next);
+                    makeRandomMove();
                     console.log("reflectHorizontal");
                     break;
                 }
                 else{ 
                     var boardPlace = reverseReflectHorizontal(j);
-                    var action = new AIAction(boardPlace);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    ui.insertAt(boardPlace, turn);
-                    game.advanceTo(next);
+                    makeMenaceMove(boardPlace);
                     console.log("reflectHorizontal");
                     break;
                 }
@@ -838,49 +787,31 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array reflected vertically
 			else if (reflectVertical().toString() === boardArray[i].toString()){
-                        ui.insertBead(0, beadIntArray[i][2]);
-                        ui.insertBead(1, beadIntArray[i][1]);
                         ui.insertBead(2, beadIntArray[i][0]);
-                        ui.insertBead(3, beadIntArray[i][5]);
-                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(1, beadIntArray[i][1]);
+                        ui.insertBead(0, beadIntArray[i][2]);
                         ui.insertBead(5, beadIntArray[i][3]);
-                        ui.insertBead(6, beadIntArray[i][8]);
-                        ui.insertBead(7, beadIntArray[i][7]);  
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(3, beadIntArray[i][5]);
                         ui.insertBead(8, beadIntArray[i][6]);
+                        ui.insertBead(7, beadIntArray[i][7]);  
+                        ui.insertBead(6, beadIntArray[i][8]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(j = 0; j < beadIntArray[i].length; j++){
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break;
-                        }
-                }
+                generateProbability();
                 if(cumulativeProbability === 0) {
                     console.log("RANDOM MOVE!!");
-                    var available = game.currentState.emptyCells();
-                    j = available[Math.floor(Math.random() * available.length)];
-                    var action = new AIAction(j);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(j, turn);
-                    game.advanceTo(next);
+                    makeRandomMove();
                     console.log("reflectVertical");
                     break;
                 }
                 else{
                     var boardPlace = reverseReflectVertical(j);
-                    var action = new AIAction(boardPlace);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(boardPlace, turn);
-                    game.advanceTo(next);
+                    makeMenaceMove(boardPlace);
                     console.log("reflectVertical");
                     break;
                 }
@@ -889,50 +820,31 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array rotated left 90 and reflected horizontally
 			else if (rotateLeft90andReflectHorizontal().toString() === boardArray[i].toString()){
-                        ui.insertBead(0, beadIntArray[i][8]);
-                        ui.insertBead(1, beadIntArray[i][5]);
-                        ui.insertBead(2, beadIntArray[i][2]);
-                        ui.insertBead(3, beadIntArray[i][7]);
-                        ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(5, beadIntArray[i][1]);
-                        ui.insertBead(6, beadIntArray[i][6]);
-                        ui.insertBead(7, beadIntArray[i][3]);  
                         ui.insertBead(8, beadIntArray[i][0]);
+                        ui.insertBead(5, beadIntArray[i][1]);
+                        ui.insertBead(2, beadIntArray[i][2]);
+                        ui.insertBead(7, beadIntArray[i][3]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(1, beadIntArray[i][5]);
+                        ui.insertBead(6, beadIntArray[i][6]);
+                        ui.insertBead(3, beadIntArray[i][7]);  
+                        ui.insertBead(0, beadIntArray[i][8]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(j = 0; j < beadIntArray[i].length; j++){
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break;
-                      
-                    }
-                }
+                generateProbability();
                 if(cumulativeProbability === 0) {
                     console.log("RANDOM MOVE!!");
-                    var available = game.currentState.emptyCells();
-                    j = available[Math.floor(Math.random() * available.length)];
-                    var action = new AIAction(j);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(j, turn);
-                    game.advanceTo(next);
+                    makeRandomMove();
 				    console.log("rotateLeft90andReflectHorizontal");
                     break;
                 }
                 else{
                     var boardPlace = reverseLeft90andReflectHorizontal(j);
-                    var action = new AIAction(boardPlace);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(boardPlace, turn);
-                    game.advanceTo(next);
+                    makeMenaceMove(boardPlace);
 				    console.log("rotateLeft90andReflectHorizontal");
                     break;
                 }
@@ -942,13 +854,13 @@ function sleepFor(sleepDuration) {
             //if its the same as a state in the array rotated right 90 and reflected vertically
 			else if (rotateRight90andReflectVertical().toString() === boardArray[i].toString()){
                         ui.insertBead(0, beadIntArray[i][0]);
-                        ui.insertBead(1, beadIntArray[i][3]);
-                        ui.insertBead(2, beadIntArray[i][6]);
                         ui.insertBead(3, beadIntArray[i][1]);
-                        ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(5, beadIntArray[i][7]);
                         ui.insertBead(6, beadIntArray[i][2]);
-                        ui.insertBead(7, beadIntArray[i][5]);  
+                        ui.insertBead(1, beadIntArray[i][3]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(7, beadIntArray[i][5]);
+                        ui.insertBead(2, beadIntArray[i][6]);
+                        ui.insertBead(5, beadIntArray[i][7]);  
                         ui.insertBead(8, beadIntArray[i][8]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
@@ -956,35 +868,16 @@ function sleepFor(sleepDuration) {
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(j = 0; j < beadIntArray[i].length; j++){
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break;
-                      
-                    }
-                }
+                generateProbability();
                 if(cumulativeProbability === 0) {
                     console.log("RANDOM MOVE!!");
-                    var available = game.currentState.emptyCells();
-                    j = available[Math.floor(Math.random() * available.length)];
-                    var action = new AIAction(j);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(j, turn);
-                    game.advanceTo(next);
+                    makeRandomMove();
                     console.log("rotateRight90andReflectVertical");
                     break;
                 }
                 else{
                     var boardPlace = reverseRight90andReflectVertical(j);
-                    var action = new AIAction(boardPlace);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(boardPlace, turn);
-                    game.advanceTo(next);
+                    makeMenaceMove(boardPlace);
                     console.log("rotateRight90andReflectVertical");
                     break;
                 }
@@ -993,49 +886,30 @@ function sleepFor(sleepDuration) {
             
             //if its the same as a state in the array rotated 180 and reflected horizontally    
 			else if (rotate180andReflectHorizontal().toString() === boardArray[i].toString()){
-							//console.log(i);
-                        ui.insertBead(0, beadIntArray[i][2]);
+                        ui.insertBead(2, beadIntArray[i][0]);
                         ui.insertBead(1, beadIntArray[i][1]);
-                        ui.insertBead(2, beadIntArray[i][6]);
-                        ui.insertBead(3, beadIntArray[i][5]);
+                        ui.insertBead(6, beadIntArray[i][2]);
+                        ui.insertBead(5, beadIntArray[i][3]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(5, beadIntArray[i][5]);
-                        ui.insertBead(6, beadIntArray[i][0]);
-                        ui.insertBead(7, beadIntArray[i][1]);  
-                        ui.insertBead(8, beadIntArray[i][2]);
+                        ui.insertBead(3, beadIntArray[i][5]);
+                        ui.insertBead(8, beadIntArray[i][6]);
+                        ui.insertBead(7, beadIntArray[i][7]);  
+                        ui.insertBead(0, beadIntArray[i][8]);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p);
-                for(j = 0; j < beadIntArray[i].length; j++){
-                    cumulativeProbability += beadIntArray[i][j];
-                        if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                            console.log(j);
-                        break; 
-                        }   
-                }
+                generateProbability();
                 if(cumulativeProbability === 0) {
                     console.log("RANDOM MOVE!!");
-                    var available = game.currentState.emptyCells();
-                    j = available[Math.floor(Math.random() * available.length)];
-                    var action = new AIAction(j);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(j, turn);
-                    game.advanceTo(next);
+                    makeRandomMove();
                     console.log("rotate180andReflectHorizontal");
                     break;
                 }
                 else{
                     var boardPlace = reverse180andReflectHorizontal(j);
-                    var action = new AIAction(boardPlace);
-                    next = action.applyTo(game.currentState);
-                    rewards.push(i,j);
-                    //sleepFor(2000);
-                    ui.insertAt(boardPlace, turn);
-                    game.advanceTo(next);
+                    makeMenaceMove(boardPlace);
                     console.log("rotate180andReflectHorizontal");
                     break;
                 }

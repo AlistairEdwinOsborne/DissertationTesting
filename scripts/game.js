@@ -1,6 +1,9 @@
 /* Total number of menace games played without reset
 */
 var counter = 0;
+/*
+* to check against the original array 
+*/
 /* A State within the game
 */
 var State = function(old) {
@@ -165,9 +168,14 @@ var Game = function(autoPlayer) {
             console.log(winIndex1);
             winIndex2 = rewards[n + 1];
             console.log(winIndex2);
+             if(beadIntArrayCopy[winIndex1][winIndex2] === 0){
+                /* do nothing */
+            }
+            else{
             win = beadIntArray[winIndex1][winIndex2] + 3;
             console.log(win);
-            beadIntArray[winIndex1].splice(winIndex2, 1, win);  
+            beadIntArray[winIndex1].splice(winIndex2, 1, win);
+            }
         }
       console.log("=======LOOP=ENDS=HERE=========");
 
@@ -206,9 +214,14 @@ var Game = function(autoPlayer) {
             console.log(drawIndex1);
             drawIndex2 = rewards[n + 1];
             console.log(drawIndex2);
+             if(beadIntArrayCopy[drawIndex1][drawIndex2] === 0){
+                /* do nothing */
+            }
+            else{
             draw = beadIntArray[drawIndex1][drawIndex2] + 1;
             console.log(draw);
-            beadIntArray[drawIndex1].splice(drawIndex2, 1, draw);  
+            beadIntArray[drawIndex1].splice(drawIndex2, 1, draw);
+            }
         }
       console.log("=======LOOP=ENDS=HERE=========");
  

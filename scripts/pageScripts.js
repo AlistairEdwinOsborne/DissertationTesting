@@ -4,7 +4,8 @@ tempBoardArray = [];
 boardArray = [];
 tempBeadArray = [];
 beadArray = [];
-beadIntArray= [];
+beadIntArray = [];
+beadIntArrayCopy = [];
 function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
@@ -52,9 +53,11 @@ function dataRead(){
                 }
     //converts all the strings into ints to be used when adding or taking away beads        
     for(var k = 0; k < beadArray.length; k++){
-        beadIntArray[k] = []
+        beadIntArray[k] = [];
+        beadIntArrayCopy[k] = [];
         for(var l = 0; l< beadArray[k].length; l++){
             beadIntArray[k][l] = parseInt(beadArray[k][l], 10);
+            beadIntArrayCopy[k][l] = parseInt(beadArray[k][l], 10);
         }
     }
            //console.log(beadIntArray);

@@ -7,31 +7,11 @@ var ui = {};
 ui.intialControlsVisible = true;
 
 //holds the setInterval handle for the robot flickering
-ui.robotFlickeringHandle = 0;
+//ui.robotFlickeringHandle = 0;
 
 //holds the current visible view
 ui.currentView = "";
 
-/*
- * starts the flickering effect of the robot image
- */
-ui.startRobotFlickering = function() {
-    ui.robotFlickeringHandle = setInterval(function() {
-        $("#robot").toggleClass('robot');
-    }, 500);
-};
-
-/*
- * stops the flickering effect on the robot image
- */
-ui.stopRobotFlickering = function() {
-    clearInterval(ui.robotFlickeringHandle);
-};
-
-/*
- * switchs the view on the UI depending on who's turn it switchs
- * @param turn [String]: the player to switch the view to
- */
 ui.switchViewTo = function(turn) {
 
     //helper function for async calling
@@ -39,8 +19,9 @@ ui.switchViewTo = function(turn) {
         ui.currentView = "#" + _turn;
         $(ui.currentView).fadeIn("fast");
 
-        if(_turn === "ai")
-            ui.startRobotFlickering();
+        if(_turn === "ai"){
+            //do nothing
+        }   
     }
 
     if(ui.intialControlsVisible) {

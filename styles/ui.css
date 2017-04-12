@@ -12,25 +12,93 @@ h1{
 }
 
 h2{
+    display: none;
     font-family: pixel;
     text-align: center;
-    margin-top: -30px;
+    margin-top: 2%;
     color: red;
     font-size: 30px;
-    margin-left: 800px;
+    margin-left: 38%;
 }
 
 h3{
+    display: none;
     font-family: pixel;
     text-align: center;
-    margin-top: -60px;
-    margin-right: 800px;
+    margin-top: -3%;
+    margin-right: 42%;
     color: white;
     font-size: 30px;
 }
 
+.intro{
+    position: absolute;
+    font-family: pixel;
+    color: red;
+    font-size: 40px;
+    text-align: center;
+    margin-right: 10%;
+    margin-left: -10%;
+}
+
+p1{
+    font-family: pixel;
+    text-align: center;
+    color: white;
+    font-size: 30px;  
+}
+
+p2{
+    font-family: pixel;
+    text-align: left;
+    color: red;
+    font-size: 40px;   
+}
+
+.menaceinfo{
+    display: none;
+    font-family: pixel;
+    color: white;
+    font-size: 30px;
+    text-align: left;
+    position: absolute;
+    margin-left: -300px;
+    margin-right: 100px;
+    margin-top: 10px;
+    postion: absolute;
+    float: left;  
+}
+
+.perfectinfo{
+    display: none;
+    font-family: pixel;
+    color: white;
+    font-size: 30px;
+    text-align: left;
+    position: absolute;
+    margin-left: -300px;
+    margin-right: 100px;
+    margin-top: 10px;
+    postion: absolute;
+    float: left;  
+}
+
+.humaninfo{
+    display: none;
+    font-family: pixel;
+    color: white;
+    font-size: 30px;
+    text-align: left;
+    position: absolute;
+    margin-left: -300px;
+    margin-right: 100px;
+    margin-top: 10px;
+    postion: absolute;
+    float: left;  
+}
+
 .main-container {
-    height: 450px;
+    height: 450;
     width: 1100px;
     margin: auto;
     margin-top: 10px;
@@ -44,77 +112,29 @@ h3{
     margin-left: auto;
     margin-right: auto;
 }
-ul.topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: none;
-}
-
-ul.topnav li {float: left;}
-
-ul.topnav li a {
-  display: inline-block;
-  color: #87CEFA;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  transition: 0.3s;
-   font-family: pixel;
-    font-size: 40px;
-    text-align: center;
-    margin-left: 370px;
-    opacity: 0.5
-
-}
 
 body {
-    background-image: url("../imgs/background.png ")
-}
-
-@media screen and (max-width:680px) {
-  ul.topnav li:not(:first-child) {display: none;}
-  ul.topnav li.icon {
-    float: right;
-    display: inline-block;
-  }
-}
-
-@media screen and (max-width:680px) {
-  ul.topnav.responsive {position: relative;}
-  ul.topnav.responsive li.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  ul.topnav.responsive li {
-    float: none;
-    display: inline;
-  }
-  ul.topnav.responsive li a {
-    display: block;
-    text-align: left;
-  }
+    background-image: url("../imgs/background.png ");
+    background-size: cover;  
 }
 
 .active{
     background-color: black;
 }
 
-.inline {
-
-}
-
 .board {
-    
     border: 10px solid transparent;
+    display: none;
     margin-left: -65px;
     postion: absolute;
     float: left;
-    height: 420px;
+    height: 410px;
     width: 420px;
-    border-image: url("../imgs/board.png") 200 stretch;
+    //border-image: url("../imgs/board.png") ;
+    background-image: url("../imgs/board.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    //background-attachment: fixed;
     /*margin-left: -50px;
     margin-top: 30px;
     border-style: solid;
@@ -123,12 +143,13 @@ body {
 }
 
 .board2 {
-    float: right;
+    display: none;
     postion: absolute;
+    float: right;
     margin-right: -60px;
     margin-top: -510px;
     border: 10px solid transparent;
-    height: 450px;
+    height: 420px;
     width: 450px;
     /*margin-left: px;
     margin-top: px ;
@@ -136,55 +157,65 @@ body {
 }
 
 .cell {
-
-    width: 140px;
-    height: 140px;
+    border: 1px solid transparent;
+    postion: absolute;
+    width: 120px;
+    height: 120px;
+    margin-left: 15px;
+    margin-top: 12px;
     background: url("../imgs/boardcell.png");
     border-style: transparent;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     cursor:pointer;
-    float:left;
-    line-height: 140px;
+    float: left;
+    line-height: 120px;
     text-align: center;
     font-family: pixel;
-    font-size: 70px;
+    font-size: 80px;
+}
+.cell:hover {
+  background: url("../imgs/boardcellpressed.png");
 }
 
 .bead {
- 
+    postion: absolute;
     width: 150px;
     height: 150px;
     background: url("../imgs/coin.png");
     background-repeat: no-repeat;
-    border-style: 10px transparent;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     cursor:pointer;
-    float:left;
+    float: right;
     line-height: 140px;
     text-align: center;
     font-family: pixel;
     font-size: 60px; 
 }
+
 .control {
+    postion: absolute;
     font-family: pixel;
     font-size: 40px;
     text-align: center;
-    margin-top: 200px;
+    margin-top: 260px;
 	color: RED;
 }
+
 .menace-skull {
     margin: auto;
-
     width: 500px;
-    positon: static;
+    postion: absolute;
     height: 500px;
 }
+
 .level1 {
-    margin: 0 15px;
+    margin-left: 80px;
+    text-align: center;
+    font-size: 50px;
     color: white;
     cursor: pointer;
 }
@@ -198,6 +229,9 @@ body {
     opacity:1;
 }
 
+.selected{
+    
+}
 .start {
     margin-top: 20px;
     width: 150px;
@@ -215,7 +249,6 @@ body {
 }
 
 .restart {
-    margin-top: 20px;
     width: 150px;
     height: 100px;
     background: transparent url('../imgs/button.png');
@@ -229,6 +262,36 @@ body {
     opacity:1;
     /* was 0.5 before */
 }
+.return {
+    margin-top: -100px;
+    width: 150px;
+    height: 100px;
+    background: transparent url('../imgs/button.png');
+    line-height: 100px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    margin-right: auto;
+    margin-left: 600px;
+    cursor:pointer;
+    opacity:1;
+    /* was 0.5 before */
+}
+.fastforward {
+    margin-top: -100px;
+    width: 150px;
+    height: 100px;
+    background: transparent url('../imgs/button.png');
+    line-height: 100px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    margin-right: 600px;
+    margin-left: auto;
+    cursor:pointer;
+    opacity:1;
+    /* was 0.5 before */
+}
 
 .counter {
     position: absolute;
@@ -238,6 +301,7 @@ body {
     font-family: pixel;
     font-size: 50px; 
 }
+
 .thinking {
     position: absolute;
     margin-left: 900px;
@@ -247,7 +311,13 @@ body {
     font-family: pixel;
     font-size: 50px; 
 }
+
 .restart:hover {
+   -webkit-filter: drop-shadow(10px 10px 5px #222);
+  filter: drop-shadow(10px 10px 5px #222);
+}
+
+.return:hover {
    -webkit-filter: drop-shadow(10px 10px 5px #222);
   filter: drop-shadow(10px 10px 5px #222);
 }
@@ -266,6 +336,3 @@ body {
     margin:0px;
 }
 
-.robot {
-    opacity:0.5;
-}

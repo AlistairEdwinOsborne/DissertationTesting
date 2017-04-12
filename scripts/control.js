@@ -12,6 +12,14 @@ var flags = {
     areGamesRunning: false
 };
 /*
+ * return to main screen (onclick div.return) behavior and control
+ * when pressed returns the user to the main screen with difficulty selection
+*/
+
+$(".return").click(function(){
+    location.reload();
+})
+/*
  * choosing difficulty level (onclick span.level) behavior and control
  * when a level is clicked, it becomes highlighted and the "ai.level" variable
  * is set to the chosen level
@@ -41,6 +49,7 @@ $(".level2").each(function() {
 
 
 
+
 /*
  * start game (onclick div.start) behavior and control
  * when start is clicked and a level is chosen, the game status changes to "running"
@@ -52,10 +61,26 @@ $(".start").click(function() {
         var aiPlayer = new AI(selectedDifficulty);
 
         globals.game = new Game(aiPlayer);
-
+        
         aiPlayer.plays(globals.game);
+        $('.intro').hide();
+        $('.menaceinfo').hide();
+        $('.humaninfo').hide();
+        $('.perfectinfo').hide();
+        $('.board').fadeIn({duration : "slow"});
         if(ai.level === "menace"){
             document.getElementById("menace-skull").style.backgroundImage = "url('imgs/menace.png')";
+            $('.board2').fadeIn({duration : "slow"});
+            $('h3').fadeIn({duration : "slow"});
+            $('h2').fadeIn({duration : "slow"});
+            
+        }
+        else{
+            //document.getElementById("board").style.float = "center";
+            //document.getElementsByClassName("board").style.marginLeft = "330px";
+            $('p1').hide();
+            $('.board').fadeIn({duration : "slow"});
+            $('.board').css({'margin-left' : '300px','float' : 'center'})
         }
         console.log(ai.level);
         globals.game.start();
@@ -69,32 +94,8 @@ $(".start").click(function() {
 */
 
 $(".restart").click(function(){
-    
-    /* kind of works but doesnt clear values from UI
-    
-    $(".cell").each(function() {
-        var $this = $(this);
-                var indx = parseInt($this.data("indx"));
-                var next = new State(globals.game.currentState);
-                var boardLength = next.board.length;
-                //for( var i = boardLength -1; i >= 0; i--){
-                next.board[indx] = "E";
-                    
-                next.board[indx].html(" ");
-            //}
-  
-        });
-    
-    /*
-    $(".cell").each(function(index, item){
-        if(parseInt($(item).data('index'))<= 8) {
-            
-        }
-    })
-    
-    var endBoard = $('.cell');
-     */
     $(".cell").html("");
+    $(".bead").html("");
     $(".cell").removeClass('occupied');
    var selectedDifficulty = $('.selected').attr("id");
     if(typeof selectedDifficulty !== "undefined") {

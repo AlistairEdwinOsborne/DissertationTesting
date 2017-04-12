@@ -6,6 +6,7 @@ tempBeadArray = [];
 beadArray = [];
 beadIntArray = [];
 beadIntArrayCopy = [];
+
 function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
@@ -64,17 +65,29 @@ function dataRead(){
             }); 
             
         }
-
-
-
 /*
-1[2E3]4[5E6]7[8E9]10
-11[12E13]14[15E16]17[18E19]20
-21[22E23]24[25E26]27[28E29]30
+ * Hide and show function for the info regarding each option within the menu
 */
+function displayMenaceInfo(){
+    $('.intro').hide();
+    $('.humaninfo').hide();
+    $('.perfectinfo').hide();
+    $('.menaceinfo').fadeIn({duration : "slow"});
+}
+
+function displayPerfectInfo(){
+    $('.menaceinfo').hide();
+    $('.humaninfo').hide();
+    $('.intro').hide();
+    $('.perfectinfo').fadeIn({duration : "slow"});
+}
+
+function displayHumanInfo(){
+    $('.menaceinfo').hide();
+    $('.perfectinfo').hide();
+    $('.intro').hide();
+    $('.humaninfo').fadeIn({duration : "slow"});
+}
 
 
-/*
-* Allows a file to be read into the page either to a div or array elements for further use
-* @param filePath [filePath]: where the file is to be read in
-*/
+

@@ -15,18 +15,18 @@ h2{
     display: none;
     font-family: pixel;
     text-align: center;
-    margin-top: 2%;
+    margin-top: 0px;
     color: red;
     font-size: 30px;
-    margin-left: 38%;
+    margin-left: 730px;
 }
 
 h3{
     display: none;
     font-family: pixel;
     text-align: center;
-    margin-top: -3%;
-    margin-right: 42%;
+    margin-top: -55px;
+    margin-right: 800px;
     color: white;
     font-size: 30px;
 }
@@ -36,9 +36,10 @@ h3{
     font-family: pixel;
     color: red;
     font-size: 40px;
-    text-align: center;
-    margin-right: 10%;
-    margin-left: -10%;
+    text-align: left;
+    margin-right: 350px;
+    margin-left: -300px;
+    float: left;
 }
 
 p1{

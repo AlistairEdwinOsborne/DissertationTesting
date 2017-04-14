@@ -64,10 +64,15 @@ ui.insertAt = function(indx, symbol) {
         targetCell.addClass('occupied');
     }
 }
-
-ui.insertBead = function(indx, symbol) {
-    var board = $('.bead');
-    var targetCell = $(board[indx]);
-        targetCell.html("$" + symbol);
+/*
+ * places the amount of beads in the specifed place in the bead array (coins)
+ * @param i [Number] : row number (0-indexed)
+ * @param j [Number] : column number (0-indexed)
+ * @param amount [String]: coressponding bead from the array
+ */
+ui.insertBead = function(indx, amount) {
+    var beads = $('.bead');
+    var targetCell = $(beads[indx]);
+        targetCell.html("$" + amount);
         targetCell.css({color : "black"});
 }

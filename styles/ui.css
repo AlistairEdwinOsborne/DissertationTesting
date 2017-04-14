@@ -182,7 +182,7 @@ body {
 
 .bead {
     postion: absolute;
-    width: 150px;
+    width: 140px;
     height: 150px;
     background: url("../imgs/coin.png");
     background-repeat: no-repeat;
@@ -314,6 +314,10 @@ body {
 }
 
 .restart:hover {
+   -webkit-filter: drop-shadow(10px 10px 5px #222);
+  filter: drop-shadow(10px 10px 5px #222);
+}
+.fastforward:hover {
    -webkit-filter: drop-shadow(10px 10px 5px #222);
   filter: drop-shadow(10px 10px 5px #222);
 }

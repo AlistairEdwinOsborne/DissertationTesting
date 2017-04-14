@@ -8,13 +8,16 @@ var counter = 0;
 */
 var State = function(old) {
 /* the player who's turn it currently is
-                */
+*/
     this.turn = "";
- /* the number of moves the AI have taken
-                */
+/* the number of moves the o player has taken
+*/
     this.oMovesCount = 0;
-                /* the current state of the game
-                */
+/* the number of moves the x player has taken 
+*/     
+    this.xMovesCount = 0;
+/* the current state of the game
+*/
     this.result = "ongoing";
 
     /*
@@ -32,9 +35,26 @@ var State = function(old) {
         }
 
         this.oMovesCount = old.oMovesCount;
+        this.xMovesCount = old.xMovesCount;
         this.result = old.result;
         this.turn = old.turn;
     }
+    
+    /*
+    else{
+        // Starts the object construction when using the 2 player AI menace system
+        var len = old.board.length;
+        this.board = new Array(len);
+        for(var itr = 0 ; itr < len ; itr++) {
+            this.board[itr] = old.board[itr];
+        }
+
+        this.xMovesCount = old.xMovesCount;
+        this.oMovesCount = old.oMovesCount;
+        this.result = old.result;
+        this.turn = old.turn;
+    }  */
+    
     /* End Object Construction */
 
     /*
@@ -115,8 +135,6 @@ var State = function(old) {
     };
 
 };
-
-
 
 /*
  * Constructs a game object to be played
@@ -246,7 +264,7 @@ var Game = function(autoPlayer) {
                 rewards = [];
                 console.log(rewards);
                 ui.switchViewTo("won");
-                document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                //document.getElementById("counter").innerHTML = "Games Played:" + counter;
                 }
             else if(_state.result === "O-winningstate"){
                 //X lost
@@ -268,7 +286,7 @@ var Game = function(autoPlayer) {
                 rewards = [];
                 console.log(rewards);
                 ui.switchViewTo("drawingstate");
-                document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                //6document.getElementById("counter").innerHTML = "Games Played:" + counter;
                 }    
         }
         else if(_state.isTerminal()) {
@@ -277,6 +295,7 @@ var Game = function(autoPlayer) {
              //return onendCall(this.currentState);
             if(_state.result === "X-winningstate"){
                 //X won 
+                console.log("X HAS WON");
                 ui.switchViewTo("won");
                 }
             else if(_state.result === "O-winningstate"){
@@ -315,6 +334,199 @@ var Game = function(autoPlayer) {
     this.start = function() {
         console.log(boardArray);  
         console.log(beadIntArray);    
+        if(this.status = "beginning") {
+            //invoke advanceTo with the initial state
+            this.advanceTo(this.currentState);
+            this.status = "running";
+        }
+    }
+    
+            /*
+     * specify a callback when the game ends
+     */
+    this.onEnd = function(func) {
+        onendCall = func;
+    }
+
+
+};
+
+
+/*
+ * Constructs a training object to be played
+ * @param autoPlayer [AIPlayer1] : the player to be play the game with
+ * @param autoPlayer [AIPlayer2] : the 2nd player to be play the game with
+ */
+var Training = function(autoPlayer1, autoPlayer2) {
+    
+    var onendCall = function(){};
+
+    //public : initialize the ai player for this game
+    //this.aiX = autoPlayer1;
+    this.aiX = autoPlayer1;
+    this.ai0 = autoPlayer2;
+
+    // public : initialize the game current state to empty board configuration
+    this.currentState = new State();
+
+    //"E" stands for empty board cell
+    this.currentState.board = ["E", "E", "E",
+                               "E", "E", "E",
+                               "E", "E", "E"];
+
+    this.currentState.turn = "X"; //X plays first
+
+    /*
+     * initialize game status to beginning
+     */
+    this.status = "beginning";
+    
+  /*checks to see if the current state of the board matches a state within the array
+    * @param board [Array]: the current state of the board as an array of strings
+    */
+    this.compareMoves = function(board){
+        
+          var a = board.toString();
+            
+            for(var i = 0; i < boardArray.length; i++){
+                var b = boardArray[i].toString();
+                    if(a===b){
+                        return i;
+                    }
+                }
+            }
+        
+  this.rewardMenaceWin = function(){
+        console.log("======LOOP=STARTS=HERE========");
+        for(var n = 0; n < rewards.length; n += 2){
+            var winIndex1 = 0;
+            var winIndex2 = 0;
+            var win = 0;
+            winIndex1 = rewards[n];
+            console.log(winIndex1);
+            winIndex2 = rewards[n + 1];
+            console.log(winIndex2);
+             if(beadIntArrayCopy[winIndex1][winIndex2] === 0){
+                /* do nothing */
+            }
+            else{
+            win = beadIntArray[winIndex1][winIndex2] + 3;
+            console.log(win);
+            beadIntArray[winIndex1].splice(winIndex2, 1, win);
+            }
+        }
+      console.log("=======LOOP=ENDS=HERE=========");
+
+    }
+  
+  this.rewardMenaceLoss = function(){
+        console.log("======LOOP=STARTS=HERE========");
+        for(var n = 0; n < rewards.length; n += 2){
+            var lossIndex1 = 0;
+            var lossIndex2 = 0;
+            var loss = 0;
+            lossIndex1 = rewards[n];
+            console.log(lossIndex1);
+            lossIndex2 = rewards[n + 1];
+            console.log(lossIndex2);
+            if(beadIntArray[lossIndex1][lossIndex2] === 0){
+                /* do nothing */
+            }
+            else{
+                loss = beadIntArray[lossIndex1][lossIndex2] - 1;
+                console.log(loss);
+                beadIntArray[lossIndex1].splice(lossIndex2, 1, loss);
+            }
+        }
+      console.log("=======LOOP=ENDS=HERE=========");
+
+  }
+  
+  this.rewardMenaceDraw = function(){
+     console.log("======LOOP=STARTS=HERE========");
+        for(var n = 0; n < rewards.length; n += 2){
+            var drawIndex1 = 0;
+            var drawIndex2 = 0;
+            var draw = 0;
+            drawIndex1 = rewards[n];
+            console.log(drawIndex1);
+            drawIndex2 = rewards[n + 1];
+            console.log(drawIndex2);
+             if(beadIntArrayCopy[drawIndex1][drawIndex2] === 0){
+                /* do nothing */
+            }
+            else{
+            draw = beadIntArray[drawIndex1][drawIndex2] + 1;
+            console.log(draw);
+            beadIntArray[drawIndex1].splice(drawIndex2, 1, draw);
+            }
+        }
+      console.log("=======LOOP=ENDS=HERE=========");
+ 
+  }
+
+    /*
+     * public function that advances the game to a new state
+     * @param _state [State]: the new state to advance the game to
+     */
+    this.advanceTo = function(_state) {
+        this.currentState = _state;
+        if(_state.isTerminal()){
+            counter++;
+            this.status = "ended";
+            
+
+             //return onendCall(this.currentState);
+            if(_state.result === "O-winningstate"){
+                //X won
+                this.rewardMenaceLoss();
+                rewards = [];
+                return onendCall(this.currentState);
+                //document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                }
+            else if(_state.result === "X-winningstate"){
+                //X lost
+                this.rewardMenaceWin();
+                rewards = [];
+                console.log(rewards);
+                document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                return onendCall(this.currentState);
+                }
+            else{
+                //it's a draw
+                this.rewardMenaceDraw();
+                rewards = [];
+                return onendCall(this.currentState);
+                //6document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                }    
+        }
+        else {
+            //the game is ongoing
+
+            if(this.currentState.turn === "X") {
+                //ui.switchViewTo("human");
+                this.aiX.notify("X");
+            }
+            else {
+                //ui.switchViewTo("robot");
+
+                //notify the AI player its turn has come up
+                this.aiO.notify("O");
+            }
+        }
+    };
+    
+
+
+        
+
+    /*
+     * starts the game
+     */
+    
+    this.start = function() {
+        //console.log(boardArray);  
+        //console.log(beadIntArray);    
         if(this.status = "beginning") {
             //invoke advanceTo with the initial state
             this.advanceTo(this.currentState);

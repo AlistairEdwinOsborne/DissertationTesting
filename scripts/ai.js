@@ -288,7 +288,7 @@ var AI = function(level) {
         * @Param [int]
         */
         function reverseRight90(a){
-                if( a === 2){
+              if( a === 2){
                     return 0;
                 }
                 else if( a === 5){
@@ -314,7 +314,7 @@ var AI = function(level) {
                 }
                 else if( a === 6){
                     return 8;
-                }
+                }  
 
         }
         /*rotates the index back to the current game state form
@@ -348,7 +348,6 @@ var AI = function(level) {
                 else if( a === 2){
                     return 8;
                 }
-
         }
         
         /*rotates the index back to the current game state form
@@ -616,7 +615,7 @@ function generateProbability(){
     for(j = 0; j < beadIntArray[i].length; j++){
         cumulativeProbability += beadIntArray[i][j];
             if(p <= cumulativeProbability && beadIntArray[i][j] != 0){
-                console.log(j);
+                //console.log(j);
                 break; 
                 }   
         }
@@ -655,15 +654,15 @@ function generateProbability(){
             //if its the same as a state in the array rotated 90 Right
 			else if (rotateRight90().toString() === boardArray[i].toString()){
                 //add beads to menace board
-                        ui.insertBead(6, beadIntArray[i][0]);
-                        ui.insertBead(3, beadIntArray[i][1]);
-                        ui.insertBead(0, beadIntArray[i][2]);
-                        ui.insertBead(7, beadIntArray[i][3]);
-                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(2, beadIntArray[i][2]);
                         ui.insertBead(1, beadIntArray[i][5]);
-                        ui.insertBead(8, beadIntArray[i][6]);
-                        ui.insertBead(5, beadIntArray[i][7]);  
-                        ui.insertBead(2, beadIntArray[i][8]);            
+                        ui.insertBead(0, beadIntArray[i][8]);
+                        ui.insertBead(5, beadIntArray[i][1]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(3, beadIntArray[i][7]);
+                        ui.insertBead(8, beadIntArray[i][0]);
+                        ui.insertBead(7, beadIntArray[i][3]);  
+                        ui.insertBead(6, beadIntArray[i][6]);            
                     
                 
                 //console.log(i);
@@ -673,7 +672,7 @@ function generateProbability(){
                 var p = Math.floor(Math.random() * testing) + 1;
                 //console.log(p); 
                 generateProbability();
-                console.log(cumulativeProbability);
+                //console.log(cumulativeProbability);
                if(cumulativeProbability === 0) {
                     console.log("RANDOM MOVE!!");
                     makeRandomMove();
@@ -690,14 +689,15 @@ function generateProbability(){
             
              //if its the same as a state in the array rotated 90 Left
 			else if (rotateLeft90().toString() === boardArray[i].toString()){
-                        ui.insertBead(2, beadIntArray[i][0]);
-                        ui.insertBead(5, beadIntArray[i][1]);
-                        ui.insertBead(8, beadIntArray[i][3]);
+                        ui.insertBead(2, beadIntArray[i][6]);
+                        ui.insertBead(1, beadIntArray[i][3]);
+                        ui.insertBead(0, beadIntArray[i][0]);
+                        ui.insertBead(5, beadIntArray[i][7]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(7, beadIntArray[i][5]);
-                        ui.insertBead(0, beadIntArray[i][6]);
-                        ui.insertBead(3, beadIntArray[i][7]);  
-                        ui.insertBead(6, beadIntArray[i][8]);               
+                        ui.insertBead(3, beadIntArray[i][1]);
+                        ui.insertBead(8, beadIntArray[i][8]);
+                        ui.insertBead(7, beadIntArray[i][5]);  
+                        ui.insertBead(6, beadIntArray[i][2]);               
 				//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -713,6 +713,8 @@ function generateProbability(){
                 }
                 else{
                     var boardPlace = reverseLeft90(j);
+                    var beads = $('.bead');
+                    //$(beads[boardPlace]).css({'border' : '10px solid', 'border-radius' : '50%', 'border-color' : 'red'})
                     makeMenaceMove(boardPlace);
                     console.log("rotateLeft90");
                     break;
@@ -722,15 +724,15 @@ function generateProbability(){
             
             //if its the same as a state in the array rotated 180
 			else if (rotate180().toString() === boardArray[i].toString()){
-                        ui.insertBead(8, beadIntArray[i][0]);
+                        ui.insertBead(6, beadIntArray[i][0]);
                         ui.insertBead(7, beadIntArray[i][1]);
-                        ui.insertBead(6, beadIntArray[i][2]);
-                        ui.insertBead(5, beadIntArray[i][3]);
+                        ui.insertBead(8, beadIntArray[i][2]);
+                        ui.insertBead(3, beadIntArray[i][3]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(3, beadIntArray[i][5]);
-                        ui.insertBead(2, beadIntArray[i][6]);
+                        ui.insertBead(5, beadIntArray[i][5]);
+                        ui.insertBead(0, beadIntArray[i][6]);
                         ui.insertBead(1, beadIntArray[i][7]);  
-                        ui.insertBead(0, beadIntArray[i][8]);
+                        ui.insertBead(2, beadIntArray[i][8]);
 					//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -755,15 +757,15 @@ function generateProbability(){
             
             //if its the same as a state in the array reflected horizontally
 			else if (reflectHorizontal().toString() === boardArray[i].toString()){
-                        ui.insertBead(6, beadIntArray[i][0]);
-                        ui.insertBead(7, beadIntArray[i][1]);
-                        ui.insertBead(8, beadIntArray[i][2]);
-                        ui.insertBead(3, beadIntArray[i][3]);
+                        ui.insertBead(2, beadIntArray[i][6]);
+                        ui.insertBead(1, beadIntArray[i][7]);
+                        ui.insertBead(0, beadIntArray[i][8]);
+                        ui.insertBead(5, beadIntArray[i][3]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(5, beadIntArray[i][5]);
-                        ui.insertBead(0, beadIntArray[i][6]);
-                        ui.insertBead(1, beadIntArray[i][7]);  
-                        ui.insertBead(2, beadIntArray[i][8]);
+                        ui.insertBead(3, beadIntArray[i][5]);
+                        ui.insertBead(8, beadIntArray[i][0]);
+                        ui.insertBead(7, beadIntArray[i][1]);  
+                        ui.insertBead(6, beadIntArray[i][2]);
 						//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -787,15 +789,15 @@ function generateProbability(){
             
             //if its the same as a state in the array reflected vertically
 			else if (reflectVertical().toString() === boardArray[i].toString()){
-                        ui.insertBead(2, beadIntArray[i][0]);
+                        ui.insertBead(0, beadIntArray[i][0]);
                         ui.insertBead(1, beadIntArray[i][1]);
-                        ui.insertBead(0, beadIntArray[i][2]);
-                        ui.insertBead(5, beadIntArray[i][3]);
+                        ui.insertBead(2, beadIntArray[i][2]);
+                        ui.insertBead(3, beadIntArray[i][3]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(3, beadIntArray[i][5]);
-                        ui.insertBead(8, beadIntArray[i][6]);
+                        ui.insertBead(5, beadIntArray[i][5]);
+                        ui.insertBead(6, beadIntArray[i][6]);
                         ui.insertBead(7, beadIntArray[i][7]);  
-                        ui.insertBead(6, beadIntArray[i][8]);
+                        ui.insertBead(8, beadIntArray[i][8]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -820,15 +822,15 @@ function generateProbability(){
             
             //if its the same as a state in the array rotated left 90 and reflected horizontally
 			else if (rotateLeft90andReflectHorizontal().toString() === boardArray[i].toString()){
-                        ui.insertBead(8, beadIntArray[i][0]);
-                        ui.insertBead(5, beadIntArray[i][1]);
-                        ui.insertBead(2, beadIntArray[i][2]);
-                        ui.insertBead(7, beadIntArray[i][3]);
-                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(2, beadIntArray[i][8]);
                         ui.insertBead(1, beadIntArray[i][5]);
-                        ui.insertBead(6, beadIntArray[i][6]);
-                        ui.insertBead(3, beadIntArray[i][7]);  
-                        ui.insertBead(0, beadIntArray[i][8]);
+                        ui.insertBead(0, beadIntArray[i][2]);
+                        ui.insertBead(5, beadIntArray[i][7]);
+                        ui.insertBead(4, beadIntArray[i][4]);
+                        ui.insertBead(3, beadIntArray[i][1]);
+                        ui.insertBead(8, beadIntArray[i][6]);
+                        ui.insertBead(7, beadIntArray[i][3]);  
+                        ui.insertBead(6, beadIntArray[i][0]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -853,15 +855,15 @@ function generateProbability(){
             
             //if its the same as a state in the array rotated right 90 and reflected vertically
 			else if (rotateRight90andReflectVertical().toString() === boardArray[i].toString()){
-                        ui.insertBead(0, beadIntArray[i][0]);
-                        ui.insertBead(3, beadIntArray[i][1]);
-                        ui.insertBead(6, beadIntArray[i][2]);
+                        ui.insertBead(2, beadIntArray[i][0]);
                         ui.insertBead(1, beadIntArray[i][3]);
+                        ui.insertBead(0, beadIntArray[i][6]);
+                        ui.insertBead(5, beadIntArray[i][1]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(7, beadIntArray[i][5]);
-                        ui.insertBead(2, beadIntArray[i][6]);
-                        ui.insertBead(5, beadIntArray[i][7]);  
-                        ui.insertBead(8, beadIntArray[i][8]);
+                        ui.insertBead(3, beadIntArray[i][7]);
+                        ui.insertBead(8, beadIntArray[i][2]);
+                        ui.insertBead(7, beadIntArray[i][5]);  
+                        ui.insertBead(6, beadIntArray[i][8]);
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -886,15 +888,15 @@ function generateProbability(){
             
             //if its the same as a state in the array rotated 180 and reflected horizontally    
 			else if (rotate180andReflectHorizontal().toString() === boardArray[i].toString()){
-                        ui.insertBead(2, beadIntArray[i][0]);
+                        ui.insertBead(2, beadIntArray[i][2]);
                         ui.insertBead(1, beadIntArray[i][1]);
-                        ui.insertBead(6, beadIntArray[i][2]);
-                        ui.insertBead(5, beadIntArray[i][3]);
+                        ui.insertBead(0, beadIntArray[i][6]);
+                        ui.insertBead(5, beadIntArray[i][5]);
                         ui.insertBead(4, beadIntArray[i][4]);
-                        ui.insertBead(3, beadIntArray[i][5]);
-                        ui.insertBead(8, beadIntArray[i][6]);
+                        ui.insertBead(3, beadIntArray[i][3]);
+                        ui.insertBead(8, beadIntArray[i][8]);
                         ui.insertBead(7, beadIntArray[i][7]);  
-                        ui.insertBead(0, beadIntArray[i][8]);
+                        ui.insertBead(6, beadIntArray[i][0]);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
@@ -915,7 +917,7 @@ function generateProbability(){
                 }
 			}
 		}
-		console.log("1st Index for Bead Array " + i);
+		console.log("1st Index for Bead Array " + i + " 2nd Index for Bead Array " + j);
         
         
 		//rotation courtesy of PHS Learning Winning Strategies in Games 200/5 Chapter 3 Page 17-10

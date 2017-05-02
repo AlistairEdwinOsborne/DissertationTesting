@@ -39,23 +39,6 @@ var State = function(old) {
         this.result = old.result;
         this.turn = old.turn;
     }
-    
-    /*
-    else{
-        // Starts the object construction when using the 2 player AI menace system
-        var len = old.board.length;
-        this.board = new Array(len);
-        for(var itr = 0 ; itr < len ; itr++) {
-            this.board[itr] = old.board[itr];
-        }
-
-        this.xMovesCount = old.xMovesCount;
-        this.oMovesCount = old.oMovesCount;
-        this.result = old.result;
-        this.turn = old.turn;
-    }  */
-    
-    /* End Object Construction */
 
     /*
      * public : advances the turn in a the state
@@ -78,17 +61,6 @@ var State = function(old) {
         return indexs;
     }
 
-        
-    /*this.resetCells = function(){
-        var boardLength = this.board.length;
-        for(var i = boardLength -1; i >= 0 ; i--){
-            this.board.splice(i, "E");
-            ui.insertAt(i, "");
-        }
-        
-    }*/
-        
-  
     
     /*
      * public  function that checks if the state is a terminal state or not
@@ -112,6 +84,7 @@ var State = function(old) {
             if(B[i] !== "E" && B[i] === B[i + 3] && B[i + 3] === B[i + 6]) {
                 this.result = B[i] + "-winningstate"; //update the state result
                 return true;
+              
             }
         }
 
@@ -120,6 +93,7 @@ var State = function(old) {
             if(B[i] !== "E" && B[i] == B[i + j] && B[i + j] === B[i + 2*j]) {
                 this.result = B[i] + "-winningstate"; //update the state result
                 return true;
+              
             }
         }
 
@@ -128,6 +102,7 @@ var State = function(old) {
             //the game is draw
             this.result = "drawingstate"; //update the state result
             return true;
+            
         }
         else {
             return false;
@@ -244,6 +219,7 @@ var Game = function(autoPlayer) {
       console.log("=======LOOP=ENDS=HERE=========");
  
   }
+  
 
     /*
      * public function that advances the game to a new state
@@ -275,7 +251,7 @@ var Game = function(autoPlayer) {
                 rewards = [];
                 console.log(rewards);
                 ui.switchViewTo("lost");
-                document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                //document.getElementById("counter").innerHTML = "Games Played:" + counter;
                 }
             else{
                 //it's a draw
@@ -286,7 +262,7 @@ var Game = function(autoPlayer) {
                 rewards = [];
                 console.log(rewards);
                 ui.switchViewTo("drawingstate");
-                //6document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                //document.getElementById("counter").innerHTML = "Games Played:" + counter;
                 }    
         }
         else if(_state.isTerminal()) {
@@ -364,7 +340,7 @@ var Training = function(autoPlayer1, autoPlayer2) {
     //public : initialize the ai player for this game
     //this.aiX = autoPlayer1;
     this.aiX = autoPlayer1;
-    this.ai0 = autoPlayer2;
+    this.aiO = autoPlayer2;
 
     // public : initialize the game current state to empty board configuration
     this.currentState = new State();
@@ -395,8 +371,8 @@ var Training = function(autoPlayer1, autoPlayer2) {
                     }
                 }
             }
-        
-  this.rewardMenaceWin = function(){
+    
+      this.rewardMenaceWin = function(){
         console.log("======LOOP=STARTS=HERE========");
         for(var n = 0; n < rewards.length; n += 2){
             var winIndex1 = 0;
@@ -416,6 +392,7 @@ var Training = function(autoPlayer1, autoPlayer2) {
             }
         }
       console.log("=======LOOP=ENDS=HERE=========");
+        console.log("MENACE WON!!!");
 
     }
   
@@ -464,6 +441,7 @@ var Training = function(autoPlayer1, autoPlayer2) {
       console.log("=======LOOP=ENDS=HERE=========");
  
   }
+  
 
     /*
      * public function that advances the game to a new state
@@ -474,22 +452,21 @@ var Training = function(autoPlayer1, autoPlayer2) {
         if(_state.isTerminal()){
             counter++;
             this.status = "ended";
-            
-
              //return onendCall(this.currentState);
-            if(_state.result === "O-winningstate"){
+            if(_state.result === "X-winningstate"){
                 //X won
                 this.rewardMenaceLoss();
                 rewards = [];
                 return onendCall(this.currentState);
                 //document.getElementById("counter").innerHTML = "Games Played:" + counter;
                 }
-            else if(_state.result === "X-winningstate"){
+            else if(_state.result === "O-winningstate"){
                 //X lost
                 this.rewardMenaceWin();
+            
                 rewards = [];
                 console.log(rewards);
-                document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                //document.getElementById("counter").innerHTML = "Games Played:" + counter;
                 return onendCall(this.currentState);
                 }
             else{
@@ -497,14 +474,13 @@ var Training = function(autoPlayer1, autoPlayer2) {
                 this.rewardMenaceDraw();
                 rewards = [];
                 return onendCall(this.currentState);
-                //6document.getElementById("counter").innerHTML = "Games Played:" + counter;
+                //document.getElementById("counter").innerHTML = "Games Played:" + counter;
                 }    
         }
         else {
             //the game is ongoing
 
             if(this.currentState.turn === "X") {
-                //ui.switchViewTo("human");
                 this.aiX.notify("X");
             }
             else {
@@ -518,8 +494,7 @@ var Training = function(autoPlayer1, autoPlayer2) {
     
 
 
-        
-
+    
     /*
      * starts the game
      */
@@ -543,13 +518,14 @@ var Training = function(autoPlayer1, autoPlayer2) {
 
 
 };
+
 /*
  * public static function that calculates the score of the x player in a given terminal state
  * @param _state [State]: the state in which the score is calculated
  * @return [Number]: the score calculated for the human player
  */
 Game.score = function(_state) {
-   if(_state.result !== "still running") {
+   if(_state.result !== "ongoing") {
     if(_state.result === "X-winningstate"){
         // the x player won
         return 10 - _state.oMovesCount;

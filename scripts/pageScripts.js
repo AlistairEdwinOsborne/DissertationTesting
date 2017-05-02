@@ -7,14 +7,6 @@ beadArray = [];
 beadIntArray = [];
 beadIntArrayCopy = [];
 
-function myFunction() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-}
 
 function checkFileAPI(){
     if (window.File && window.FileReader && window.FileList && window.Blob){
@@ -26,6 +18,7 @@ function checkFileAPI(){
         return false;
     }
 }
+
 
 function dataRead(){
         //grabs the file to read in and splits each state into a new line and adds to statearray
@@ -46,7 +39,7 @@ function dataRead(){
         
                 boardArray[j] = tempBoardArray[j].split(",");
             }
-            //console.log(boardArray);
+            console.log(boardArray);
             
      //splits each string up in an individual element (removes the ,)       
     for (var iy = 0; iy < tempBeadArray.length; iy++){
@@ -61,7 +54,7 @@ function dataRead(){
             beadIntArrayCopy[k][l] = parseInt(beadArray[k][l], 10);
         }
     }
-           //console.log(beadIntArray);
+           console.log(beadIntArray);
             }); 
             
         }

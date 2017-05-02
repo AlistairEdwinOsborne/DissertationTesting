@@ -2,15 +2,11 @@
  * object to contain all items accessable to all control functions
  */
 var globals = {};
+/*
+ * Variable to check if training games are happening and if so cause UI triggers
+ */
+var isTraining = false;
 
-var config = {
-    level1: "",
-    level2: "",
-};
-
-var flags = {
-    areGamesRunning: false
-};
 /*
  * return to main screen (onclick div.return) behavior and control
  * when pressed returns the user to the main screen with difficulty selection
@@ -35,20 +31,89 @@ $(".level1").each(function() {
         ai.level = $this.attr("id");
     });
 });
-
-$(".level2").each(function() {
-    var $this = $(this);
-    $this.click(function() {
-        $('.selected').toggleClass('not-selected');
-        $('.selected').toggleClass('selected');
-        $this.toggleClass('not-selected');
-        $this.toggleClass('selected');
-        ai.level = $this.attr("id");
-    });
+/*
+$(".restart").hover(function(){
+    var timer;
+    var delay = 1000;
+    timer = setTimeout(function(){
+    $('.restartPopUp').fadeIn("slow");
+    }, delay);
+    
+}, function (){
+    $('.restartPopUp').fadeOut("slow");
+    clearTimeout(timer);
 });
 
+*/6
+/*
+ *
+ */
+function runTheGames(){ 
 
+  
+    var trainingGames = function(xPlayer, oPlayer){
+                var training = new Training(xPlayer, oPlayer);
+                xPlayer.plays(training);
+                oPlayer.plays(training);
+                training.start();
+    }
 
+    
+    var firstEvent = function(){
+        isTraining = true;
+        var elem = document.getElementById("progress"); 
+        var xPlayer = new AI("master");
+        var oPlayer = new AI("menace");
+
+                for(var count = 0; count < 30; count++){
+                    //console.log("GAMES REMAINING: " + 10 - count);
+                    trainingGames(xPlayer, oPlayer);
+                }
+                 $('.control').fadeIn("slow", function (){
+                    secondEvent();
+                });
+ 
+            
+        var secondEvent = function(){
+                $('.board2').fadeIn("slow");
+                $('.board').fadeIn("slow");
+                $('.menace-skull').fadeIn("slow");
+                $("h2").fadeIn("slow");
+                $("h3").fadeIn("slow");
+                $('.training').hide();
+                $('#won').contents()[0].nodeValue = 'Training Complete';
+            $('#drawingstate').contents()[0].nodeValue = 'Training Complete';
+            $('#lost').contents()[0].nodeValue = 'Training Complete';
+                $(".cell").html("");
+                $(".bead").html("");
+                isTraining = false;
+                console.log("FINISHED TRAINING");
+            }
+      };
+
+    
+    //this is just in the function
+    $('.board2').fadeOut("slow");
+    //$('#progress').fadeIn("slow");
+    $('.board').fadeOut("slow");
+    $('.control').fadeOut("slow");
+    $('.menace-skull').fadeOut("slow");
+    $("h2").fadeOut("slow");
+    $('.training').fadeIn("slow");
+    $("h3").fadeOut("slow", function (){ 
+        firstEvent();
+    });
+}
+ 
+
+/*
+ * start training game (onlick div.fastforward)
+ * when clicked sets the aix to perfectplayer and aio to menace and starts the games
+ * Also add UI indicators
+ */
+$(".fastforward").click(function(){
+        runTheGames();  
+});
 
 /*
  * start game (onclick div.start) behavior and control
@@ -73,6 +138,7 @@ $(".start").click(function() {
             $('.board2').fadeIn({duration : "slow"});
             $('h3').fadeIn({duration : "slow"});
             $('h2').fadeIn({duration : "slow"});
+            $('.fastforward').css({'display' : 'block'});
             
         }
         else{
@@ -94,9 +160,14 @@ $(".start").click(function() {
 */
 
 $(".restart").click(function(){
+    isTraining = false;
+    $('#won').contents()[0].nodeValue = 'You won !';
+    $('#lost').contents()[0].nodeValue = 'You lost !';
+    $('#drawingstate').contents()[0].nodeValue = 'Its a Draw!';
     $(".cell").html("");
     $(".bead").html("");
     $(".cell").removeClass('occupied');
+    $('.bead').css({'border' : '0px none'}); 
    var selectedDifficulty = $('.selected').attr("id");
     if(typeof selectedDifficulty !== "undefined") {
         var aiPlayer = new AI(selectedDifficulty);
@@ -125,9 +196,9 @@ $(".restart").click(function(){
              console.log(globals.game.currentState.board.toString());
              var next = new State(globals.game.currentState);
              next.board[indx] = "X";
-            
+           
              ui.insertAt(indx, "X");
-             //console.log(indx);
+             console.log(indx);
              next.advanceTurn();
              
              globals.game.advanceTo(next);

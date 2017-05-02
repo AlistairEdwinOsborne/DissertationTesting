@@ -6,9 +6,6 @@ var ui = {};
 //holds the state of the intial controls visibility
 ui.intialControlsVisible = true;
 
-//holds the setInterval handle for the robot flickering
-//ui.robotFlickeringHandle = 0;
-
 //holds the current visible view
 ui.currentView = "";
 

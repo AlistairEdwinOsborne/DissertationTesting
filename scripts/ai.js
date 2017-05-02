@@ -1,3 +1,6 @@
+/*
+ * Array to hold all the rewards for M.E.N.A.C.E for any game
+ */
 var rewards = [];
 /*
  * Constructs an action that the ai player could make
@@ -25,9 +28,11 @@ var AIAction = function(pos) {
 
         if(state.turn === "O")
             next.oMovesCount++;
-
+        
+        else
+            next.xMovesCount++;
+        
         next.advanceTurn();
-
         return next;
     }
 };
@@ -145,7 +150,9 @@ var AI = function(level) {
                                 //console.log(indx);
                         var action = new AIAction(indx);
                         var next = action.applyTo(game.currentState);
+                        if(isTraining === false){
                             ui.insertAt(indx, "O");
+                        }
                             game.advanceTo(next);
                             //console.log(next);
                             }
@@ -153,6 +160,8 @@ var AI = function(level) {
             });
           
     };
+    
+    
     
     function takeMenaceMove(turn){
         //var plot = new State(game.currentState.board);
@@ -580,32 +589,39 @@ var AI = function(level) {
 		console.log(rotate180andReflectHorizontal().toString());
 		console.log("=================ROTATIONS=============================");
        */ 
-        
-function sleepFor(sleepDuration) {
-    var now = new Date().getTime();
-    while(new Date().getTime() < now + sleepDuration){
-        document.getElementById('thinking').innerHTML = "SHHH HES THINKING!!";
-        /* DO MENACE THINKING ANIMATION! */
-    }
-    //document.getElementById('thinking').innerHTML = "";
-}
+ 
+
+       
         
 function makeMenaceMove(boardPlace){
     var action = new AIAction(boardPlace);
     next = action.applyTo(game.currentState);
+    var beads = $('.bead'); 
+     $('.bead').css({'border' : '0px none'}); 
+    var beadHighlight = reverseReflectVertical(boardPlace);
     rewards.push(i,j);
+    if(isTraining === false){
     ui.insertAt(boardPlace, turn);
+    $(beads[beadHighlight]).css({'border' : '10px solid', 'border-radius' : '50%', 'border-color' : 'red'});
+    }
     game.advanceTo(next);
 }
 
 function makeRandomMove(){
+
+    var beads = $('.bead');
+    $('.bead').css({'border' : '0px none'}); 
     var available = game.currentState.emptyCells();
     j = available[Math.floor(Math.random() * available.length)];
     var action = new AIAction(j);
     next = action.applyTo(game.currentState);
     rewards.push(i,j);
+    var beadHighlight = reverseReflectVertical(j);
     //sleepFor(2000);
+    if(isTraining === false){
+    $(beads[beadHighlight]).css({'border' : '10px solid', 'border-radius' : '50%', 'border-color' : 'red'});
     ui.insertAt(j, turn);
+    }
     game.advanceTo(next);
 }
 
@@ -654,6 +670,7 @@ function generateProbability(){
             //if its the same as a state in the array rotated 90 Right
 			else if (rotateRight90().toString() === boardArray[i].toString()){
                 //add beads to menace board
+                if(isTraining === false){
                         ui.insertBead(2, beadIntArray[i][2]);
                         ui.insertBead(1, beadIntArray[i][5]);
                         ui.insertBead(0, beadIntArray[i][8]);
@@ -663,7 +680,7 @@ function generateProbability(){
                         ui.insertBead(8, beadIntArray[i][0]);
                         ui.insertBead(7, beadIntArray[i][3]);  
                         ui.insertBead(6, beadIntArray[i][6]);            
-                    
+                   } 
                 
                 //console.log(i);
                var testing =  beadIntArray[i].reduce(add, 0);
@@ -676,6 +693,7 @@ function generateProbability(){
                if(cumulativeProbability === 0) {
                     console.log("RANDOM MOVE!!");
                     makeRandomMove();
+                    console.log("rotateRight90");
                     break;
                 }
                 else{
@@ -689,6 +707,7 @@ function generateProbability(){
             
              //if its the same as a state in the array rotated 90 Left
 			else if (rotateLeft90().toString() === boardArray[i].toString()){
+                if(isTraining === false){
                         ui.insertBead(2, beadIntArray[i][6]);
                         ui.insertBead(1, beadIntArray[i][3]);
                         ui.insertBead(0, beadIntArray[i][0]);
@@ -697,7 +716,8 @@ function generateProbability(){
                         ui.insertBead(3, beadIntArray[i][1]);
                         ui.insertBead(8, beadIntArray[i][8]);
                         ui.insertBead(7, beadIntArray[i][5]);  
-                        ui.insertBead(6, beadIntArray[i][2]);               
+                        ui.insertBead(6, beadIntArray[i][2]);
+                }
 				//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -724,6 +744,7 @@ function generateProbability(){
             
             //if its the same as a state in the array rotated 180
 			else if (rotate180().toString() === boardArray[i].toString()){
+                if(isTraining === false){
                         ui.insertBead(6, beadIntArray[i][0]);
                         ui.insertBead(7, beadIntArray[i][1]);
                         ui.insertBead(8, beadIntArray[i][2]);
@@ -733,6 +754,7 @@ function generateProbability(){
                         ui.insertBead(0, beadIntArray[i][6]);
                         ui.insertBead(1, beadIntArray[i][7]);  
                         ui.insertBead(2, beadIntArray[i][8]);
+                        }
 					//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -757,6 +779,7 @@ function generateProbability(){
             
             //if its the same as a state in the array reflected horizontally
 			else if (reflectHorizontal().toString() === boardArray[i].toString()){
+                        if(isTraining === false){
                         ui.insertBead(2, beadIntArray[i][6]);
                         ui.insertBead(1, beadIntArray[i][7]);
                         ui.insertBead(0, beadIntArray[i][8]);
@@ -766,6 +789,7 @@ function generateProbability(){
                         ui.insertBead(8, beadIntArray[i][0]);
                         ui.insertBead(7, beadIntArray[i][1]);  
                         ui.insertBead(6, beadIntArray[i][2]);
+                        }
 						//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -789,6 +813,7 @@ function generateProbability(){
             
             //if its the same as a state in the array reflected vertically
 			else if (reflectVertical().toString() === boardArray[i].toString()){
+                        if(isTraining === false){
                         ui.insertBead(0, beadIntArray[i][0]);
                         ui.insertBead(1, beadIntArray[i][1]);
                         ui.insertBead(2, beadIntArray[i][2]);
@@ -798,6 +823,7 @@ function generateProbability(){
                         ui.insertBead(6, beadIntArray[i][6]);
                         ui.insertBead(7, beadIntArray[i][7]);  
                         ui.insertBead(8, beadIntArray[i][8]);
+                        }
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -822,6 +848,7 @@ function generateProbability(){
             
             //if its the same as a state in the array rotated left 90 and reflected horizontally
 			else if (rotateLeft90andReflectHorizontal().toString() === boardArray[i].toString()){
+                        if(isTraining === false){
                         ui.insertBead(2, beadIntArray[i][8]);
                         ui.insertBead(1, beadIntArray[i][5]);
                         ui.insertBead(0, beadIntArray[i][2]);
@@ -831,6 +858,7 @@ function generateProbability(){
                         ui.insertBead(8, beadIntArray[i][6]);
                         ui.insertBead(7, beadIntArray[i][3]);  
                         ui.insertBead(6, beadIntArray[i][0]);
+                        }
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -855,6 +883,7 @@ function generateProbability(){
             
             //if its the same as a state in the array rotated right 90 and reflected vertically
 			else if (rotateRight90andReflectVertical().toString() === boardArray[i].toString()){
+                        if(isTraining === false){
                         ui.insertBead(2, beadIntArray[i][0]);
                         ui.insertBead(1, beadIntArray[i][3]);
                         ui.insertBead(0, beadIntArray[i][6]);
@@ -864,6 +893,7 @@ function generateProbability(){
                         ui.insertBead(8, beadIntArray[i][2]);
                         ui.insertBead(7, beadIntArray[i][5]);  
                         ui.insertBead(6, beadIntArray[i][8]);
+                        }
 							//console.log(i);
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
@@ -888,6 +918,7 @@ function generateProbability(){
             
             //if its the same as a state in the array rotated 180 and reflected horizontally    
 			else if (rotate180andReflectHorizontal().toString() === boardArray[i].toString()){
+                        if(isTraining === false){
                         ui.insertBead(2, beadIntArray[i][2]);
                         ui.insertBead(1, beadIntArray[i][1]);
                         ui.insertBead(0, beadIntArray[i][6]);
@@ -897,6 +928,7 @@ function generateProbability(){
                         ui.insertBead(8, beadIntArray[i][8]);
                         ui.insertBead(7, beadIntArray[i][7]);  
                         ui.insertBead(6, beadIntArray[i][0]);
+                        }
                 var testing =  beadIntArray[i].reduce(add, 0);
                 //console.log(testing);
                 var cumulativeProbability = 0;
@@ -972,8 +1004,9 @@ function generateProbability(){
         //take the first action as it's the optimal
         var chosenAction = availableActions[0];
         var next = chosenAction.applyTo(game.currentState);
-
+        if(isTraining === false){
         ui.insertAt(chosenAction.movePosition, turn);
+        }
         console.log(next);    
         game.advanceTo(next);
     }

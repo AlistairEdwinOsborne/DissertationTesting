@@ -52,8 +52,8 @@ p1{
 p2{
     font-family: pixel;
     text-align: left;
-    color: red;
-    font-size: 40px;   
+    color: white;
+    font-size: 35px;   
 }
 
 .menaceinfo{
@@ -115,8 +115,9 @@ p2{
 }
 
 body {
-    background-image: url("../imgs/background.png ");
-    background-size: cover;  
+    background-image: url("../imgs/background1.png ");
+    background-size: 1%; 
+    background-repeat: repeat;
 }
 
 .active{
@@ -194,7 +195,7 @@ body {
     line-height: 140px;
     text-align: center;
     font-family: pixel;
-    font-size: 60px; 
+    font-size: 50px; 
 }
 
 .control {
@@ -211,6 +212,30 @@ body {
     width: 500px;
     postion: absolute;
     height: 500px;
+}
+
+.training {
+    margin-top: -400px;
+    margin-left: 100px;
+    position: absolute;
+    font-family: pixel;
+    font-size: 60px;
+    display: none;
+    color: white;
+    text-align: center;
+
+}
+
+#progress {
+    font-family: pixel;
+    font-size: 40px;
+    color: black;
+    text-align: center;
+    display: none;
+    width: 1%;
+    background-color: white;
+    height: 40px;
+    border-radius: 25px;
 }
 
 .level1 {
@@ -273,12 +298,13 @@ body {
     font-size: 30px;
     color: white;
     margin-right: auto;
-    margin-left: 600px;
+    margin-left: 30%;
     cursor:pointer;
     opacity:1;
     /* was 0.5 before */
 }
 .fastforward {
+    display: none;
     margin-top: -100px;
     width: 150px;
     height: 100px;
@@ -287,7 +313,7 @@ body {
     text-align: center;
     font-size: 30px;
     color: white;
-    margin-right: 600px;
+    margin-right: 30%;
     margin-left: auto;
     cursor:pointer;
     opacity:1;
@@ -311,6 +337,28 @@ body {
     margin-top: 0px;
     font-family: pixel;
     font-size: 50px; 
+}
+
+.restartPopUp {
+    display: none;
+    position: absolute;
+    margin-left: 1000px;
+    margin-top: -40px;
+    background-image: url('../imgs/speechbubble.png');
+    background-size: 100%;
+    width: 200px;
+    height: 150px;
+    opacity: 1;
+}
+.popUpText{
+    margin: auto;
+    margin-top: 20px;
+    font-family: pixel;
+    font-size: 20px;
+    width:170px;
+    height: 170px;
+    color: black;
+    text-align: center;
 }
 
 .restart:hover {
